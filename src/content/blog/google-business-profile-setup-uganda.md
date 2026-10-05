@@ -6,6 +6,8 @@ author: "KTM Agency"
 category: "SEO"
 tags: ["Google Business Profile Uganda", "Google My Business Uganda", "Google Maps Uganda", "local SEO Uganda"]
 featured: false
+image: "/images/blog/google-business-profile-uganda.jpg"
+imageAlt: "How to Set Up Your Google Business Profile in Uganda — Step-by-Step Guide showing Google Maps listing on laptop and phone in Kampala"
 ---
 
 Your Google Business Profile is the single most important free tool available to any Uganda business owner. It is what puts your business on Google Maps, in the local pack at the top of search results and in front of customers who are actively looking for what you sell.
