@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Grab latest 3 posts to suggest on the 404 page
+const allPosts = await getCollection('blog');
+const recent = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const suggestions = [
+  { label: 'Home',          href: '/' },
+  { label: 'Services',      href: '/services/' },
+  { label: 'Portfolio',     href: '/portfolio/' },
+  { label: 'Blog',          href: '/blog/' },
+  { label: 'Contact us',    href: '/contact/' },
+];
+---
+
+<BaseLayout
+  title="Page Not Found | KTM Agency"
+  description="The page you're looking for doesn't exist. Head back to KTM Agency's homepage or browse our services."
+  noindex={true}
+>
+  <section class="nf-section">
+
+    <!-- Big 404 -->
+    <div class="nf-hero" aria-hidden="true">404</div>
+
+    <!-- Message -->
+    <div class="nf-content">
+      <span class="eyebrow" style="margin-bottom:16px;display:inline-flex">
+        <i class="sq"></i> Page not found
+      </span>
+      <h1 class="nf-title">This page doesn't exist.</h1>
+      <p class="nf-sub">
+        The link may be broken, the page may have moved, or you may have typed the address incorrectly.
+        Here are some places to go instead.
+      </p>
+
+      <!-- Quick nav buttons -->
+      <div class="nf-links">
+        {suggestions.map(s => (
+          <a class="nf-link" href={s.href}>
+            {s.label}
+            <svg class="nf-ic" aria-hidden="true" viewBox="0 0 16 16" fill="none"
+                 stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+              <path d="M4 12 12 4M5.5 4H12v6.5"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Recent posts -->
+    {recent.length > 0 && (
+      <div class="nf-posts">
+        <p class="nf-posts-label mono">Recent articles</p>
+        <div class="nf-posts-grid">
+          {recent.map(post => (
+            <a class="nf-post-card" href={`/blog/${post.slug}/`}>
+              <div>
+                <span class="nf-post-cat">{post.data.category}</span>
+                <p class="nf-post-title">{post.data.title}</p>
+              </div>
+              <svg class="nf-ic nf-post-arrow" aria-hidden="true" viewBox="0 0 16 16" fill="none"
+                   stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <path d="M3 13 13 3M5 3h8v8"/>
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+  </section>
+</BaseLayout>
+
+<style>
+.nf-section {
+  max-width: 860px;
+  margin-inline: auto;
+  padding: clamp(64px, 10vw, 120px) clamp(16px, 3vw, 40px) clamp(64px, 10vw, 120px);
+  display: grid;
+  gap: 56px;
+}
+
+/* Oversized 404 watermark */
+.nf-hero {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(6rem, 22vw, 16rem);
+  line-height: .85;
+  letter-spacing: -.06em;
+  color: var(--surface);
+  user-select: none;
+  /* Outlined / stroke effect */
+  -webkit-text-stroke: 2px var(--line);
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: -40px;
+}
+
+/* Content */
+.nf-content { display: grid; gap: 20px; }
+.nf-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+.nf-sub {
+  font-size: 16px;
+  color: var(--muted-text);
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
+/* Quick nav */
+.nf-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+.nf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.nf-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(217,50,37,.04);
+}
+.nf-link:first-child {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.nf-link:first-child:hover { background: #bf2b1f; }
+
+.nf-ic {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Recent posts */
+.nf-posts { display: grid; gap: 16px; }
+.nf-posts-label {
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--muted-text);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.nf-posts-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.nf-post-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 22px;
+  background: var(--bg);
+  text-decoration: none;
+  color: var(--fg);
+  transition: background .15s;
+}
+.nf-post-card:hover { background: var(--surface); }
+.nf-post-cat {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+.nf-post-title {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+.nf-post-card:hover .nf-post-title { color: var(--accent); }
+.nf-post-arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: color .15s, transform .15s;
+}
+.nf-post-card:hover .nf-post-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 500px) {
+  .nf-hero { font-size: clamp(5rem, 28vw, 8rem); }
+}
+</style>

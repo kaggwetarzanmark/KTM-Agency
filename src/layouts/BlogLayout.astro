@@ -423,29 +423,36 @@ const artLabel: Record<string,string> = {
   border-collapse: collapse;
   margin: 2em 0;
   font-size: .92em;
-  border-radius: 12px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--line);
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.prose thead tr {
+  background: var(--dark);
+  color: var(--on-dark);
 }
 .prose thead th {
-  background: var(--surface);
-  padding: 12px 16px;
+  padding: 14px 18px;
   text-align: left;
   font-weight: 600;
-  font-size: .85em;
-  letter-spacing: .03em;
+  font-size: .82em;
+  letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--muted-text);
-  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
 }
 .prose tbody td {
-  padding: 12px 16px;
+  padding: 13px 18px;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
   line-height: 1.5;
 }
 .prose tbody tr:last-child td { border-bottom: none; }
 .prose tbody tr:nth-child(even) td { background: var(--surface); }
+/* First column of every row — slightly bolder */
+.prose tbody td:first-child { font-weight: 500; }
 
 /* ── Blockquote — Q&A style ───────────────────────────────────── */
 /* In markdown: > "Question text"   renders as a styled Q
