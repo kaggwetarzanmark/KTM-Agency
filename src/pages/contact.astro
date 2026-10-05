@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const services = [
+  'Web Design',
+  'Web Development',
+  'App Development',
+  'SEO Services',
+  'Google Ads',
+  'Facebook Ads',
+  'Not sure yet',
+];
+
+const challenges = [
+  'My website is slow on phones',
+  "I don't show up on Google",
+  'Nobody finds me on Google Maps',
+  'I pay for ads and get no leads',
+  'My site looks outdated',
+  'I need a mobile app',
+  'I cannot update my website myself',
+  'I need help with social media ads',
+];
+---
+
+<BaseLayout
+  title="Contact KTM — Web Design & Digital Marketing Agency Kampala"
+  description="Get in touch with KTM Agency in Kampala, Uganda. Request a free quote for web design, app development, SEO, Google Ads or Facebook Ads. We reply within 24 hours."
+>
+  <Hero
+    badge="Contact"
+    heading="Let's Grow Your Business Online."
+    subheading="Tell us about your business and we will send a free quote or consultation plan within 24 hours."
+    ctaPrimary={{ label:'WhatsApp us now', href:'https://wa.me/256753784595?text=Hello%20KTM%2C%20I%27d%20like%20a%20quote.' }}
+    variant="light"
+  />
+
+  <section class="section wrap" aria-labelledby="contact-form-heading">
+    <div style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,6vw,80px);align-items:start" class="contact-grid">
+
+      <!-- Form -->
+      <div>
+        <span class="eyebrow" style="margin-bottom:16px;display:inline-flex"><i class="sq"></i> Get in touch</span>
+        <h2 class="h2" id="contact-form-heading" style="margin-bottom:32px">Send us a message</h2>
+
+        <form id="contactForm" novalidate style="display:grid;gap:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="form-row">
+            <div class="field">
+              <label for="c-name">Full name</label>
+              <input id="c-name" type="text" name="name" placeholder="Your full name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="c-biz">Business name</label>
+              <input id="c-biz" type="text" name="business" placeholder="Your business name" />
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="form-row">
+            <div class="field">
+              <label for="c-phone">Phone / WhatsApp</label>
+              <input id="c-phone" type="tel" name="phone" placeholder="+256 753 784 595" autocomplete="tel" required />
+            </div>
+            <div class="field">
+              <label for="c-email">Email address</label>
+              <input id="c-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="c-service">Service needed</label>
+            <select id="c-service" name="service"
+              style="height:48px;border-radius:12px;border:1px solid rgba(11,10,10,.18);background:var(--bg);color:var(--fg);padding:0 14px;font:inherit;font-size:15px;cursor:pointer;appearance:auto">
+              <option value="">Select a service</option>
+              {services.map(s => <option value={s}>{s}</option>)}
+            </select>
+          </div>
+
+          <!-- Problem checklist -->
+          <div>
+            <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-text);margin-bottom:12px">
+              Tick the problems you are facing (optional)
+            </p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              {challenges.map((c, i) => (
+                <label style="position:relative;cursor:pointer">
+                  <input
+                    type="checkbox"
+                    name="challenges"
+                    value={c}
+                    style="position:absolute;opacity:0;inset:0;margin:0;cursor:pointer"
+                    id={`cc${i}`}
+                  />
+                  <span style="display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg);font-size:14px;transition:background .15s,color .15s,border-color .15s;cursor:pointer" class="chip-label">
+                    {c}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="c-msg">Tell us more (optional)</label>
+            <textarea
+              id="c-msg"
+              name="message"
+              rows="4"
+              placeholder="Describe your project or what you are trying to achieve..."
+              style="border-radius:12px;border:1px solid rgba(11,10,10,.18);background:var(--bg);color:var(--fg);padding:14px;font:inherit;font-size:15px;resize:vertical;width:100%"
+            ></textarea>
+          </div>
+
+          <div>
+            <button class="btn btn-red btn-lg" type="submit">
+              Send message
+              <svg class="ic"><use href="#i-arrow"/></svg>
+            </button>
+            <p class="form-msg" id="contactMsg" role="status" aria-live="polite" style="margin-top:12px;font-size:13px;min-height:1.4em;color:var(--accent)"></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Contact details -->
+      <div style="display:grid;gap:32px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 100px)">
+        <div>
+          <span class="eyebrow" style="margin-bottom:16px;display:inline-flex"><i class="sq"></i> Find us</span>
+          <address style="font-style:normal;display:grid;gap:16px">
+            {[
+              { icon:'i-globe',   text:'Kampala, Uganda' },
+              { icon:'i-chat',    text:'+256 753 784 595', href:'https://wa.me/256753784595', label:'WhatsApp' },
+              { icon:'i-phone',   text:'+256 753 784 595', href:'tel:+256753784595', label:'Phone' },
+              { icon:'i-search',  text:'hello@ktmagency.ug', href:'mailto:hello@ktmagency.ug', label:'Email' },
+            ].map(d => (
+              <div style="display:flex;gap:14px;align-items:flex-start">
+                <div style="width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;flex-shrink:0">
+                  <svg class="ic" style="color:var(--accent)"><use href={`#${d.icon}`}/></svg>
+                </div>
+                <div style="padding-top:8px">
+                  {d.href
+                    ? <a href={d.href} style="font-size:15px" target={d.href.startsWith('http') ? '_blank' : undefined} rel={d.href.startsWith('http') ? 'noopener' : undefined}>{d.text}</a>
+                    : <span style="font-size:15px">{d.text}</span>
+                  }
+                </div>
+              </div>
+            ))}
+          </address>
+        </div>
+
+        <!-- Response time -->
+        <div style="background:var(--surface);border-radius:22px;padding:24px;display:grid;gap:10px">
+          <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;color:var(--accent);text-transform:uppercase">Our promise</p>
+          <p style="font-size:15px;line-height:1.5">We reply to every message within <strong>24 hours</strong> on working days. Most messages get a reply the same day.</p>
+          <a
+            class="btn btn-ink"
+            href="https://wa.me/256753784595?text=Hello%20KTM%2C%20I%27d%20like%20a%20quote."
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp us now
+            <svg class="ic"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+
+        <!-- Free audit offer -->
+        <div style="background:var(--dark);color:var(--on-dark);border-radius:22px;padding:24px;display:grid;gap:12px">
+          <span class="eyebrow" style="color:var(--dark-text)"><i class="sq"></i> Free offer</span>
+          <p style="font-size:15px;line-height:1.5">Not ready to commit? Request a <strong style="color:var(--on-dark)">free website and marketing audit</strong>. We'll tell you what to fix first.</p>
+          <a class="btn btn-red" href="#" onclick="document.getElementById('c-service').value='Not sure yet';document.getElementById('c-msg').value='Please send me a free website and marketing audit.';document.getElementById('c-msg').scrollIntoView({behavior:'smooth'})">
+            Get a free audit
+            <svg class="ic"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+  display: block;
+  margin-bottom: 6px;
+}
+.field input {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  padding: 0 14px;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color .15s;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.field input::placeholder { color: var(--muted); }
+
+input[type="checkbox"]:checked + .chip-label {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+@media (max-width: 960px) {
+  .contact-grid { grid-template-columns: minmax(0,1fr) !important; }
+  .contact-grid > div:last-child { position: static !important; }
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: minmax(0,1fr) !important; }
+}
+</style>
+
+<script>
+const form = document.getElementById('contactForm') as HTMLFormElement;
+const msg  = document.getElementById('contactMsg')!;
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name  = (document.getElementById('c-name')  as HTMLInputElement).value.trim();
+  const phone = (document.getElementById('c-phone') as HTMLInputElement).value.trim();
+  if (!name || !phone) {
+    msg.textContent = 'Please add your name and phone number so we can reply.';
+    msg.style.color = '#D93225';
+    return;
+  }
+  // TODO: replace with your form handler (Netlify Forms, Formspree, etc.)
+  msg.textContent = 'Thanks! We will be in touch within 24 hours.';
+  msg.style.color = '#2fa58d';
+  form.reset();
+});
+</script>

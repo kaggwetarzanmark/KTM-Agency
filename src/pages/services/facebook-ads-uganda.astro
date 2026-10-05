@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+
+const clusterPosts = [
+  {
+    title: 'Facebook Ads in Uganda: Complete Guide for Businesses',
+    slug: 'facebook-ads-guide-uganda',
+    description: 'How to set up campaigns, target Ugandan audiences and get leads from Facebook and Instagram.',
+    readTime: '10 min read',
+  },
+  {
+    title: 'Boosting Posts vs Facebook Ads in Uganda: What\'s the Difference?',
+    slug: 'facebook-ads-vs-boosting-uganda',
+    description: 'Why boosting posts rarely works for lead generation and what to do instead.',
+    readTime: '6 min read',
+  },
+  {
+    title: 'Google Ads vs SEO: Which is Better for Uganda Businesses?',
+    slug: 'google-ads-vs-seo-uganda',
+    description: 'Compare all your paid and organic options to choose the right strategy for your business.',
+    readTime: '7 min read',
+  },
+];
+
+const included = [
+  { icon:'i-search',  title:'Audience research and targeting', desc:'We build precise audiences based on location, interests, age and behaviour — targeting Kampala or anywhere in Uganda.' },
+  { icon:'i-layers',  title:'Ad creative design',              desc:'Images, graphics and ad copy made for you. We write and design everything, so you just approve and we launch.' },
+  { icon:'i-trend',   title:'A/B testing',                     desc:'Multiple ad variations tested simultaneously so we quickly identify what drives the lowest cost per result.' },
+  { icon:'i-globe',   title:'Retargeting campaigns',           desc:'Re-engage people who visited your website or interacted with your page but did not convert.' },
+  { icon:'i-receipt', title:'Campaign optimisation',           desc:'Daily monitoring, bid adjustments and creative refreshes to keep performance high as audiences grow stale.' },
+  { icon:'i-chat',    title:'Monthly reporting',               desc:'Clear reports with reach, clicks, leads, cost per lead and what we are changing next month.' },
+];
+
+const campaignTypes = [
+  { t:'Lead generation',    d:'Collect phone numbers and WhatsApp contacts directly from Facebook and Instagram.' },
+  { t:'Traffic campaigns',  d:'Send targeted Ugandan users to your website or landing page.' },
+  { t:'Conversion ads',     d:'Drive sales, bookings or sign-ups from people most likely to convert.' },
+  { t:'Brand awareness',    d:'Reach a large Ugandan audience to build recognition and trust for your brand.' },
+  { t:'WhatsApp click ads', d:'Users click your ad and open a WhatsApp chat directly, skipping the website entirely.' },
+  { t:'Retargeting',        d:'Reach people who already visited your site or watched your video but did not act.' },
+];
+
+const faqs = [
+  { question:'How much do Facebook Ads cost in Uganda?', answer:'You set your own budget. We recommend starting with at least UGX 200K to 400K per month in ad spend to get meaningful results. Our management fee is charged separately. We give you a full breakdown before starting.' },
+  { question:'How long before I see results from Facebook Ads?', answer:'Most campaigns start delivering results within the first week. The first month is partly a learning phase where Facebook is optimising delivery. Results typically improve significantly in months two and three.' },
+  { question:'Do you create the ad graphics and copy?', answer:'Yes. Our service includes designing the ad images and writing the copy. You review and approve everything before we publish.' },
+  { question:'Can you target specific locations in Uganda?', answer:'Yes. Facebook allows us to target by city, district or a custom radius. We can focus entirely on Kampala, or expand to cover Entebbe, Jinja, Mbarara or any other area you serve.' },
+  { question:"What's the difference between Facebook Ads and boosting a post?", answer:"Boosting a post is a simplified ad with limited targeting and no proper optimisation. Facebook Ads Manager gives us full control over audiences, placements, objectives, budgets and creative testing. Proper ads consistently outperform boosted posts in lead quality and cost." },
+];
+---
+
+<BaseLayout
+  title="Facebook Ads Uganda | Social Media Advertising Kampala | KTM"
+  description="Reach your ideal customers with Facebook and Instagram ads in Uganda. KTM creates high-converting social media ad campaigns for businesses in Kampala. Free audit."
+>
+  <Hero
+    badge="Facebook Ads · Uganda"
+    heading="Facebook and Instagram Advertising in Uganda."
+    subheading="Reach over 3 million Ugandan Facebook users with targeted ads that drive real leads, sales and WhatsApp conversations."
+    ctaPrimary={{ label:'Get a free Facebook Ads audit', href:'/contact/' }}
+    ctaSecondary={{ label:'See our results', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- Why Facebook in Uganda -->
+  <section class="section wrap">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:center" class="fb-split">
+      <div style="display:grid;gap:20px">
+        <span class="eyebrow"><i class="sq"></i> Why Facebook Ads in Uganda</span>
+        <h2 class="h2">Reach Uganda's most active social platform</h2>
+        <p style="font-size:15px;color:var(--muted-text);line-height:1.6">
+          Uganda has over 3 million active Facebook users. Unlike Google Ads, Facebook lets you reach people
+          before they are searching, building awareness and intent with precise targeting by location,
+          age, interest and behaviour.
+        </p>
+        <p style="font-size:15px;color:var(--muted-text);line-height:1.6">
+          Facebook and Instagram ads are especially powerful for businesses selling to consumers:
+          restaurants, clinics, schools, real estate, fashion, events and hospitality.
+        </p>
+      </div>
+      <div style="background:var(--surface);border-radius:22px;padding:32px;display:grid;gap:16px">
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;color:var(--accent);text-transform:uppercase">Uganda Facebook facts</p>
+        {[
+          { n:'3M+', l:'active Facebook users in Uganda' },
+          { n:'68%', l:'of users are aged 18 to 34' },
+          { n:'90%', l:'of Facebook use is on mobile phones' },
+          { n:'2x',  l:'average engagement vs global benchmark' },
+        ].map(f => (
+          <div style="display:flex;align-items:center;gap:16px;padding-block:14px;border-bottom:1px dashed var(--line)">
+            <b style="font-family:var(--font-display);font-size:2rem;font-weight:500;letter-spacing:-.04em;color:var(--accent);white-space:nowrap;min-width:64px">{f.n}</b>
+            <p style="font-size:14px;color:var(--muted-text)">{f.l}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Campaign types -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Campaign types</span>
+        <h2 class="h2">Ads for every business goal</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      {campaignTypes.map(c => (
+        <div style="padding:24px;border-radius:22px;border:1px solid var(--line);display:grid;gap:8px">
+          <h3 style="font-size:1rem;font-weight:500;letter-spacing:-.02em">{c.t}</h3>
+          <p style="font-size:14px;color:var(--muted-text);line-height:1.5">{c.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> What's included</span>
+        <h2 class="h2">Full service Facebook Ads management</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      {included.map(item => (
+        <div style="display:grid;grid-template-columns:40px 1fr;gap:14px;padding:24px;border-radius:22px;border:1px solid var(--line);align-items:start">
+          <div style="width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center">
+            <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href={`#${item.icon}`}/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px">{item.title}</h3>
+            <p style="font-size:13.5px;color:var(--muted-text);line-height:1.5">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="wrap">
+    <FAQ items={faqs} heading="Facebook Ads in Uganda: Common Questions" />
+  </div>
+
+  <!-- Related cluster posts -->
+  <div class="wrap">
+    <RelatedPosts heading="Facebook Ads Resources" posts={clusterPosts} />
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Free audit"
+      heading="Get your free Facebook Ads audit"
+      subheading="Already running Facebook Ads? We'll review your account and show you why your ads are underperforming and exactly how to fix them."
+      ctaLabel="Request a free audit"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+@media (max-width: 700px) {
+  .fb-split { grid-template-columns: minmax(0,1fr) !important; }
+}
+</style>

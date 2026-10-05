@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const featured = posts.find(p => p.data.featured) ?? posts[0];
+const rest     = posts.filter(p => p !== featured);
+
+const categories = ['All', 'Web Design', 'SEO', 'Google Ads', 'Facebook Ads', 'App Development', 'Digital Marketing'];
+---
+
+<BaseLayout
+  title="Blog — Web Design & Digital Marketing Tips | KTM Uganda"
+  description="Tips, guides and insights on web design, SEO, Google Ads and digital marketing for businesses in Uganda. From the KTM team in Kampala."
+>
+  <Hero
+    badge="Blog"
+    heading="Practical Advice for Ugandan Businesses."
+    subheading="Plain-English guides on web design, SEO, Google Ads, Facebook Ads and digital marketing, written for businesses in Uganda."
+    ctaPrimary={{ label:'Work with us', href:'/contact/' }}
+    variant="light"
+  />
+
+  <section class="section wrap" aria-labelledby="blog-heading">
+
+    {featured && (
+      <div style="margin-bottom:48px">
+        <span class="eyebrow" style="margin-bottom:16px;display:inline-flex">
+          <i class="sq"></i> Latest article
+        </span>
+        <BlogCard
+          title={featured.data.title}
+          description={featured.data.description}
+          pubDate={featured.data.pubDate}
+          category={featured.data.category}
+          slug={featured.slug}
+          image={featured.data.image}
+          variant="featured"
+        />
+      </div>
+    )}
+
+    <!-- Category filter -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px" role="group" aria-label="Filter by category">
+      {categories.map(cat => (
+        <button
+          class="filter-btn"
+          data-filter={cat}
+          aria-pressed={cat === 'All' ? 'true' : 'false'}
+          type="button"
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    {rest.length > 0 ? (
+      <div class="grid3" id="blogGrid">
+        {rest.map(post => (
+          <div data-category={post.data.category} class="blog-item">
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              category={post.data.category}
+              slug={post.slug}
+              image={post.data.image}
+            />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p style="color:var(--muted-text);font-size:15px">
+        More articles coming soon. Add your posts to <code>src/content/blog/</code>.
+      </p>
+    )}
+
+  </section>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Need help?"
+      heading="Talk to the KTM team"
+      subheading="Read enough? Let's talk about your business and what we can do for you."
+      ctaLabel="Get a free consultation"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.filter-btn:hover,
+.filter-btn[aria-pressed="true"] {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.blog-item.hidden { display: none; }
+</style>
+
+<script>
+const btns  = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+const items = Array.from(document.querySelectorAll<HTMLElement>('.blog-item'));
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter ?? 'All';
+    btns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+    items.forEach(item => {
+      const match = filter === 'All' || item.dataset.category === filter;
+      item.classList.toggle('hidden', !match);
+    });
+  });
+});
+</script>

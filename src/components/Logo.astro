@@ -1,0 +1,106 @@
+---
+/**
+ * Logo.astro — KTM Agency logomark
+ *
+ * Props:
+ *   size     — icon size in px (default 36)
+ *   color    — 'white' for dark backgrounds (default), 'dark' for light backgrounds
+ *   showText — show the KTM AGENCY wordmark (default true)
+ */
+export interface Props {
+  size?: number;
+  color?: 'white' | 'dark';
+  showText?: boolean;
+  class?: string;
+}
+
+const {
+  size = 36,
+  color = 'white',
+  showText = true,
+  class: className,
+} = Astro.props;
+
+const textColor = color === 'white' ? '#ffffff' : '#0B0A0A';
+const subColor  = color === 'white' ? 'rgba(255,255,255,0.55)' : 'rgba(11,10,10,0.45)';
+---
+
+<a
+  href="/"
+  aria-label="KTM Agency home"
+  class:list={['ktm-logo', className]}
+  style={`--logo-size: ${size}px`}
+>
+  <!-- Red rounded square icon with K lettermark -->
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 40 40"
+    fill="none"
+    aria-hidden="true"
+    class="ktm-logo-icon"
+  >
+    <!-- Background -->
+    <rect width="40" height="40" rx="9" fill="#D93225"/>
+    <!-- Gloss overlay -->
+    <rect width="40" height="40" rx="9" fill="url(#gloss)"/>
+    <defs>
+      <linearGradient id="gloss" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity="0.14"/>
+        <stop offset="0.6" stop-color="#fff" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity="0.08"/>
+      </linearGradient>
+    </defs>
+    <!-- K — vertical stroke -->
+    <rect x="10" y="8.5" width="5.5" height="23" rx="2" fill="#fff"/>
+    <!-- K — top arm pointing right -->
+    <polygon points="15.5,20 28,8.5 22,8.5 12,19" fill="#fff"/>
+    <!-- K — bottom arm pointing right -->
+    <polygon points="15.5,20 28,31.5 22,31.5 12,21" fill="#fff"/>
+  </svg>
+
+  {showText && (
+    <span class="ktm-logo-text">
+      <span class="ktm-logo-name" style={`color:${textColor}`}>KTM</span>
+      <span class="ktm-logo-sub"  style={`color:${subColor}`}>AGENCY</span>
+    </span>
+  )}
+</a>
+
+<style>
+.ktm-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--logo-size) * 0.28);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.ktm-logo-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+.ktm-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+
+.ktm-logo-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: calc(var(--logo-size) * 0.58);
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+
+.ktm-logo-sub {
+  font-family: var(--font-mono);
+  font-size: calc(var(--logo-size) * 0.26);
+  letter-spacing: .12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+</style>

@@ -1,0 +1,81 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  slug: string;
+  image?: string;
+  readTime?: string;
+  /** 'default' = standard card. 'featured' = larger hero-style card */
+  variant?: 'default' | 'featured';
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  category,
+  slug,
+  image,
+  readTime = '5 min read',
+  variant = 'default',
+} = Astro.props;
+
+const href = `/blog/${slug}/`;
+const formattedDate = pubDate.toLocaleDateString('en-UG', {
+  year: 'numeric', month: 'short', day: 'numeric',
+});
+
+// Map category to a gradient class
+const gradientMap: Record<string,string> = {
+  'Web Design':        'pt1',
+  'SEO':               'pt3',
+  'Google Ads':        'pt2',
+  'Facebook Ads':      'pt2',
+  'App Development':   'pt1',
+  'Digital Marketing': 'pt2',
+};
+const gradClass = gradientMap[category] ?? 'pt1';
+
+// Short text shown inside art block
+const artText: Record<string,string> = {
+  'Web Design':        'WEB',
+  'SEO':               '#1',
+  'Google Ads':        'ADS',
+  'Facebook Ads':      'ADS',
+  'App Development':   'APP',
+  'Digital Marketing': 'MKT',
+};
+const artLabel = artText[category] ?? '...';
+---
+
+<a class:list={['post', variant === 'featured' && 'post--featured']} href={href}>
+  {image ? (
+    <div class="post-art" style={`background:#1d1a19`}>
+      <img src={image} alt={title} loading="lazy" style="width:100%;height:100%;object-fit:cover;opacity:.85"/>
+    </div>
+  ) : (
+    <div class={`post-art ${gradClass}`} aria-hidden="true">{artLabel}</div>
+  )}
+  <div class="post-meta">
+    <span class="pill">{category}</span>
+    <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+    <span>{readTime}</span>
+  </div>
+  <h3>{title}</h3>
+  {variant === 'featured' && <p class="post-desc">{description}</p>}
+</a>
+
+<style>
+.post--featured .post-art {
+  aspect-ratio: 16/7;
+}
+.post-desc {
+  font-size: 15px;
+  color: var(--muted-text);
+  line-height: 1.5;
+  margin-top: 4px;
+  max-width: 52ch;
+}
+</style>

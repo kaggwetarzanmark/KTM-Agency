@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "client": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "serviceType": {
+      "type": "string",
+      "enum": [
+        "Web Design",
+        "Web Development",
+        "App Development",
+        "SEO",
+        "Google Ads",
+        "Facebook Ads"
+      ]
+    },
+    "industry": {
+      "type": "string"
+    },
+    "completedDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "image": {
+      "type": "string"
+    },
+    "imageAlt": {
+      "type": "string"
+    },
+    "results": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "technologies": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "featured": {
+      "default": false,
+      "type": "boolean"
+    },
+    "liveUrl": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "client",
+    "description",
+    "serviceType",
+    "industry",
+    "completedDate"
+  ]
+}

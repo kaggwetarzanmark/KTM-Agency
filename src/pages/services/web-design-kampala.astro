@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+
+const clusterPosts = [
+  {
+    title: 'How Much Does a Website Cost in Uganda?',
+    slug: 'how-much-does-a-website-cost-in-uganda',
+    description: 'A clear breakdown of Uganda web design pricing — from basic business sites to e-commerce stores.',
+    readTime: '6 min read',
+  },
+  {
+    title: 'Why Every Business in Uganda Needs a Website',
+    slug: 'why-every-business-in-uganda-needs-a-website',
+    description: 'Still running your business without a website? Here\'s what you\'re losing every day you don\'t have one.',
+    readTime: '5 min read',
+  },
+  {
+    title: 'How to Choose a Web Design Company in Uganda',
+    slug: 'how-to-choose-a-web-design-company-in-uganda',
+    description: 'Not all web design companies deliver what they promise. Here\'s exactly what to look for and what to avoid.',
+    readTime: '6 min read',
+  },
+];
+
+const features = [
+  { icon:'i-mobile', title:'Mobile-first design',   desc:'Built for phones first. 80% of Ugandan users browse on mobile, so every page is optimised for small screens and slow connections.' },
+  { icon:'i-trend',  title:'SEO built in',          desc:'Every page is structured for Google from day one: proper headings, meta tags, fast loading and schema markup.' },
+  { icon:'i-globe',  title:'Hosting included',      desc:'We set up your domain and hosting on Cloudflare, the fastest CDN in Africa. No technical headaches.' },
+  { icon:'i-layers', title:'Easy to manage',        desc:'Update your own content, prices and photos without calling a developer.' },
+  { icon:'i-check',  title:'Fast delivery',         desc:'Most business websites are ready to review within 14 days of us receiving your content.' },
+  { icon:'i-receipt','title':'Fixed price quotes',  desc:'You get a written quote before we start. The price you approve is the price you pay.' },
+];
+
+const process = [
+  { n:'01', title:'Discovery call',     desc:'We learn your business, your customers and the pages you need.' },
+  { n:'02', title:'Design',             desc:'Wireframes and visual design for your approval before any code is written.' },
+  { n:'03', title:'Development',        desc:'We build the site, add your content and wire up forms and WhatsApp.' },
+  { n:'04', title:'Launch',             desc:'Testing, domain setup and go-live. We stay available for two weeks after launch.' },
+];
+
+const packages = [
+  {
+    name: 'Starter',
+    tagline: 'Perfect for new businesses',
+    pages: 'Up to 5 pages',
+    features: ['Mobile-first design','Contact form + WhatsApp button','Basic SEO setup','Google Maps embed','1 round of revisions'],
+  },
+  {
+    name: 'Business',
+    tagline: 'Most popular for growing companies',
+    pages: 'Up to 10 pages',
+    features: ['Everything in Starter','Blog setup','Advanced SEO','Google Analytics setup','Gallery or portfolio section','3 rounds of revisions'],
+    highlight: true,
+  },
+  {
+    name: 'Enterprise',
+    tagline: 'For established businesses',
+    pages: 'Unlimited pages',
+    features: ['Everything in Business','Custom functionality','MoMo or card payment integration','Staff training session','Priority support for 3 months'],
+  },
+];
+
+const faqs = [
+  { question:'How long does a website take to build in Uganda?', answer:'Most business websites take 2 to 4 weeks from the discovery call to launch, depending on how quickly you provide content (text, images, logo). We will give you a specific timeline in your quote.' },
+  { question:'How much does a website cost in Uganda?', answer:'A basic 5-page business website starts from around UGX 1.5M. Larger sites with e-commerce or booking systems cost more. We send a fixed-price quote before starting so there are no surprises.' },
+  { question:'Will my website work on mobile phones?', answer:'Yes. Every website we build is mobile-first, meaning it is designed for phones before desktops. We test on the most common Android devices used in Uganda before launch.' },
+  { question:'Do you provide hosting and a domain?', answer:'Yes. We handle domain registration and set up hosting on Cloudflare Pages, which is free and extremely fast across Africa. We will explain the annual renewal costs upfront.' },
+  { question:'Can I update the website myself?', answer:'Yes. Depending on your package, we can set up a simple content management system so you can edit text, update prices and upload photos without any coding knowledge.' },
+];
+---
+
+<BaseLayout
+  title="Website Design Kampala Uganda | Professional & Affordable | KTM"
+  description="KTM designs professional, mobile-friendly, SEO-ready websites for businesses in Kampala and across Uganda. Fast delivery, fixed pricing. Get a free quote today."
+>
+  <Hero
+    badge="Web Design · Kampala, Uganda"
+    heading="Professional Website Design in Kampala, Uganda."
+    subheading="Mobile-first, fast-loading websites built to rank on Google and convert visitors into customers for businesses across Uganda."
+    ctaPrimary={{ label:'Get a Free Quote', href:'/contact/' }}
+    ctaSecondary={{ label:'See Our Portfolio', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- Features -->
+  <section class="section wrap" aria-labelledby="wd-features-heading">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> What's included</span>
+        <h2 class="h2" id="wd-features-heading">Every website we build includes</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      {features.map(f => (
+        <div style="display:grid;grid-template-columns:40px 1fr;gap:14px;padding:24px;border-radius:22px;border:1px solid var(--line);align-items:start">
+          <div style="width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center">
+            <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href={`#${f.icon}`}/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px">{f.title}</h3>
+            <p style="font-size:13.5px;color:var(--muted-text);line-height:1.5">{f.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Our process</span>
+        <h2 class="h2">From first call to live site</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border-radius:22px;overflow:hidden">
+      {process.map(step => (
+        <div style="background:var(--bg);padding:28px 24px;display:grid;gap:12px">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--accent)">{step.n}</span>
+          <h3 style="font-size:1.1rem;font-weight:500;letter-spacing:-.02em">{step.title}</h3>
+          <p style="font-size:13.5px;color:var(--muted-text);line-height:1.5">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)" aria-labelledby="wd-pricing-heading">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Pricing</span>
+        <h2 class="h2" id="wd-pricing-heading">Website packages</h2>
+      </div>
+      <p class="lead">All prices are fixed. You approve the quote before we start.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+      {packages.map(pkg => (
+        <div style={`padding:32px;border-radius:22px;border:${pkg.highlight ? '2px solid var(--accent)' : '1px solid var(--line)'};display:grid;gap:20px;align-content:start;background:${pkg.highlight ? 'var(--surface)' : 'var(--bg)'}`}>
+          {pkg.highlight && <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--accent);text-transform:uppercase">Most popular</span>}
+          <div>
+            <h3 style="font-size:1.5rem;font-weight:500;letter-spacing:-.03em">{pkg.name}</h3>
+            <p style="font-size:14px;color:var(--muted-text);margin-top:4px">{pkg.tagline}</p>
+          </div>
+          <p style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase">{pkg.pages}</p>
+          <ul style="display:grid;gap:10px">
+            {pkg.features.map(feat => (
+              <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px">
+                <svg class="ic" style="color:var(--accent);margin-top:2px;flex-shrink:0"><use href="#i-check"/></svg>
+                {feat}
+              </li>
+            ))}
+          </ul>
+          <a class:list={['btn btn-lg', pkg.highlight ? 'btn-red' : 'btn-ink']} href="/contact/" style="justify-self:start">
+            Get a quote
+            <svg class="ic"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="wrap">
+    <FAQ items={faqs} heading="Website Design in Uganda: Common Questions" />
+  </div>
+
+  <!-- Related cluster posts -->
+  <div class="wrap">
+    <RelatedPosts heading="Web Design Resources" posts={clusterPosts} />
+  </div>
+
+  <!-- CTA -->
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Ready to start?"
+      heading="Get a free website quote today"
+      subheading="Tell us about your business and we will send a fixed-price quote within 24 hours. No obligation."
+      ctaLabel="Request a free quote"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>

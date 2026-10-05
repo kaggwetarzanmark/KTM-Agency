@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+
+const clusterPosts = [
+  {
+    title: 'How Much Does Mobile App Development Cost in Uganda?',
+    slug: 'mobile-app-development-cost-uganda',
+    description: 'Clear cost ranges for Android apps, iOS apps and cross-platform projects in Uganda.',
+    readTime: '7 min read',
+  },
+  {
+    title: 'Android vs iOS: Which Platform Should Your Uganda Business App Target First?',
+    slug: 'android-vs-ios-uganda',
+    description: 'Uganda\'s smartphone market is 90% Android. Here\'s how to make the right platform decision for your budget.',
+    readTime: '6 min read',
+  },
+  {
+    title: 'Why Every Business in Uganda Needs a Website',
+    slug: 'why-every-business-in-uganda-needs-a-website',
+    description: 'A website and a mobile app work together. Here\'s why digital presence matters for Uganda businesses.',
+    readTime: '5 min read',
+  },
+];
+
+const appTypes = [
+  { title:'Delivery and logistics apps',  desc:'Rider tracking, order management and customer notifications for delivery businesses.' },
+  { title:'Booking and reservation apps', desc:'Appointment scheduling for clinics, salons, hotels and service businesses.' },
+  { title:'E-commerce apps',              desc:'Mobile shopping apps with MoMo and card payments, product catalogues and order tracking.' },
+  { title:'Business management apps',     desc:'Staff management, inventory, sales reporting and CRM tools for growing businesses.' },
+  { title:'On-demand service apps',       desc:'Connect customers with service providers: cleaners, plumbers, drivers and more.' },
+  { title:'Community and social apps',    desc:'Member directories, event apps and communication tools for organisations and communities.' },
+];
+
+const process = [
+  { n:'01', title:'Discovery',    desc:'We learn your users, your workflows and the problem the app must solve.' },
+  { n:'02', title:'Wireframes',   desc:'Clickable wireframes you approve before any visual design or code begins.' },
+  { n:'03', title:'Design',       desc:'Full UI design for every screen, tested against Ugandan user habits.' },
+  { n:'04', title:'Development',  desc:'We build for Android first, then iOS, with a shared codebase where possible.' },
+  { n:'05', title:'Testing',      desc:'Device testing on the most common Android phones used in Uganda.' },
+  { n:'06', title:'Launch',       desc:'App store submission, backend setup and go-live support.' },
+];
+
+const faqs = [
+  { question:'How much does a mobile app cost in Uganda?', answer:'A basic Android app starts from around UGX 5M. Apps with custom backends, payment integration or complex workflows cost more. We give you a fixed quote after the discovery call.' },
+  { question:'How long does app development take?', answer:'A standard app takes 8 to 16 weeks from discovery to launch. Complex apps with multiple user roles or custom backends take longer. We set a firm timeline in the contract.' },
+  { question:'Do you build for Android and iOS?', answer:'Yes. We build cross-platform apps using React Native so one codebase covers both Android and iOS. If you only need Android first, we can start there and add iOS later.' },
+  { question:'Can my app accept MTN MoMo payments?', answer:'Yes. We integrate MTN MoMo, Airtel Money and Pesapal into apps so Ugandan users can pay natively without leaving the app.' },
+  { question:'Do you provide app maintenance after launch?', answer:'Yes. We offer monthly maintenance retainers covering bug fixes, OS compatibility updates, performance monitoring and minor feature additions.' },
+];
+---
+
+<BaseLayout
+  title="Mobile App Development Uganda | Android & iOS | KTM Kampala"
+  description="KTM develops custom Android and iOS mobile apps for businesses in Uganda. Delivery apps, booking apps, e-commerce and more. Based in Kampala. Free consultation."
+>
+  <Hero
+    badge="App Development · Uganda"
+    heading="Mobile App Development in Uganda."
+    subheading="Custom Android and iOS apps for delivery, booking, e-commerce and business management. Built for Ugandan users and networks."
+    ctaPrimary={{ label:'Discuss your app idea', href:'/contact/' }}
+    ctaSecondary={{ label:'See our work', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- App types -->
+  <section class="section wrap" aria-labelledby="app-types-heading">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Types of apps we build</span>
+        <h2 class="h2" id="app-types-heading">Built for Uganda's fastest-growing sectors</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      {appTypes.map(a => (
+        <div style="padding:28px;border-radius:22px;border:1px solid var(--line);display:grid;gap:10px;align-content:start">
+          <h3 style="font-size:1.1rem;font-weight:500;letter-spacing:-.02em">{a.title}</h3>
+          <p style="font-size:14px;color:var(--muted-text);line-height:1.5">{a.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Our process</span>
+        <h2 class="h2">From idea to app store</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border-radius:22px;overflow:hidden">
+      {process.map(step => (
+        <div style="background:var(--bg);padding:28px 24px;display:grid;gap:12px">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--accent)">{step.n}</span>
+          <h3 style="font-size:1rem;font-weight:500;letter-spacing:-.02em">{step.title}</h3>
+          <p style="font-size:13.5px;color:var(--muted-text);line-height:1.5">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="wrap">
+    <FAQ items={faqs} heading="Mobile App Development in Uganda: Common Questions" />
+  </div>
+
+  <!-- Related cluster posts -->
+  <div class="wrap">
+    <RelatedPosts heading="App Development Resources" posts={clusterPosts} />
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Have an app idea?"
+      heading="Let's build it"
+      subheading="Share your idea and we will send a free scope and quote within 48 hours."
+      ctaLabel="Get a free app quote"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>

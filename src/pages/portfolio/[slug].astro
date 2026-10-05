@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('portfolio');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props:  { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const siteUrl   = 'https://ktmagency.ug';
+const canonical = `${siteUrl}/portfolio/${project.slug}/`;
+
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: project.data.title,
+  description: project.data.description,
+  creator: { '@type': 'Organization', name: 'KTM Agency', url: siteUrl },
+  dateCreated: project.data.completedDate.toISOString(),
+  keywords: [project.data.serviceType, project.data.industry, 'Uganda', 'Kampala'].join(', '),
+};
+
+const gradients = ['pa1', 'pa2', 'pa3'];
+const gradClass = gradients[Math.abs(project.slug.charCodeAt(0)) % 3];
+---
+
+<BaseLayout
+  title={`${project.data.title} — ${project.data.serviceType} | KTM Uganda`}
+  description={project.data.description}
+  canonical={canonical}
+  schema={projectSchema}
+>
+  <article class="section wrap">
+
+    <nav aria-label="Breadcrumb" style="font-size:13px;color:var(--muted-text);margin-bottom:20px;display:flex;gap:8px;flex-wrap:wrap">
+      <a href="/" style="color:var(--muted-text)">Home</a>
+      <span>/</span>
+      <a href="/portfolio/" style="color:var(--muted-text)">Portfolio</a>
+      <span>/</span>
+      <span>{project.data.client}</span>
+    </nav>
+
+    <div style="max-width:760px;margin-bottom:48px">
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+        <span class="pill">{project.data.serviceType}</span>
+        <span class="pill">{project.data.industry}</span>
+      </div>
+      <h1 style="font-family:var(--font-display);font-weight:500;font-size:clamp(2.2rem,5vw,4rem);line-height:1;letter-spacing:-.04em;margin-bottom:16px">
+        {project.data.client}
+      </h1>
+      <p style="font-size:clamp(1rem,1.6vw,1.2rem);color:var(--muted-text);max-width:52ch;line-height:1.5">
+        {project.data.description}
+      </p>
+    </div>
+
+    {project.data.image ? (
+      <div style="border-radius:22px;overflow:hidden;aspect-ratio:16/8;margin-bottom:56px">
+        <img src={project.data.image} alt={project.data.imageAlt ?? `${project.data.client} project`}
+             style="width:100%;height:100%;object-fit:cover" loading="eager" />
+      </div>
+    ) : (
+      <div class={`proj-art ${gradClass}`} aria-hidden="true"
+           style="margin-bottom:56px;aspect-ratio:16/7;border-radius:22px;display:grid;place-items:center">
+        <span style="font-family:var(--font-display);font-weight:600;font-size:clamp(3rem,8vw,6rem);letter-spacing:-.06em;color:rgba(255,255,255,.8)">
+          {project.data.client.charAt(0)}
+        </span>
+      </div>
+    )}
+
+    {project.data.results.length > 0 && (
+      <div style="background:var(--surface);border-radius:22px;padding:32px;margin-bottom:56px">
+        <span class="eyebrow" style="margin-bottom:16px;display:inline-flex"><i class="sq"></i> Results</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          {project.data.results.map(result => (
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <svg class="ic" style="color:var(--accent);flex-shrink:0;margin-top:2px"><use href="#i-check"/></svg>
+              <p style="font-size:15px;line-height:1.4">{result}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="prose" style="max-width:760px"><Content /></div>
+
+    {project.data.technologies.length > 0 && (
+      <div style="max-width:760px;margin-top:48px;padding-top:32px;border-top:1px solid var(--line)">
+        <span class="eyebrow" style="margin-bottom:16px;display:inline-flex"><i class="sq"></i> Technologies used</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          {project.data.technologies.map(tech => (
+            <span style="padding:6px 14px;border-radius:999px;border:1px solid var(--line);font-size:13px;font-weight:500">{tech}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {project.data.liveUrl && (
+      <div style="margin-top:32px">
+        <a class="btn btn-red btn-lg" href={project.data.liveUrl} target="_blank" rel="noopener">
+          View live site <svg class="ic"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    )}
+
+  </article>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Start your project"
+      heading="Want results like these?"
+      subheading="Tell us about your business and we will put together a plan."
+      ctaLabel="Get a free quote"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+.prose { font-size:16px;line-height:1.75; }
+.prose h2 { font-family:var(--font-display);font-weight:500;font-size:clamp(1.5rem,3vw,2.2rem);letter-spacing:-.03em;line-height:1.1;margin:2.5em 0 .75em; }
+.prose h3 { font-family:var(--font-display);font-weight:500;font-size:1.3rem;letter-spacing:-.02em;margin:2em 0 .5em; }
+.prose p  { margin-bottom:1.4em; }
+.prose ul,.prose ol { padding-left:1.5em;margin-bottom:1.4em; }
+.prose ul { list-style:disc; }
+.prose ol { list-style:decimal; }
+.prose li { margin-bottom:.5em; }
+.prose a  { color:var(--accent);text-decoration:underline;text-underline-offset:4px; }
+.prose strong { font-weight:600; }
+</style>

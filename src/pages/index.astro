@@ -1,0 +1,654 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import PortfolioCard from '../components/PortfolioCard.astro';
+import CTABanner from '../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const allProjects = await getCollection('portfolio');
+const featuredProjects = allProjects
+  .filter(p => p.data.featured)
+  .slice(0, 3);
+
+const services = [
+  {
+    title: 'Web Design',
+    description: 'Professional, mobile-first websites that load fast and look sharp on every screen.',
+    href: '/services/web-design-kampala/',
+    iconId: 'i-globe',
+    keyword: 'website design Kampala',
+  },
+  {
+    title: 'Web Development',
+    description: 'Custom systems — e-commerce stores, booking platforms, portals and dashboards.',
+    href: '/services/web-development-uganda/',
+    iconId: 'i-code',
+    keyword: 'web development Uganda',
+  },
+  {
+    title: 'App Development',
+    description: 'Android and iOS apps for delivery, booking, shopping and business management.',
+    href: '/services/app-development-uganda/',
+    iconId: 'i-mobile',
+    keyword: 'mobile app development Uganda',
+  },
+  {
+    title: 'SEO Services',
+    description: 'Show up when Ugandans search for what you sell — on Google Search and Maps.',
+    href: '/services/seo-services-uganda/',
+    iconId: 'i-trend',
+    keyword: 'SEO services Uganda',
+  },
+  {
+    title: 'Google Ads',
+    description: 'Paid search campaigns that bring buyers to you immediately while SEO builds up.',
+    href: '/services/google-ads-uganda/',
+    iconId: 'i-search',
+    keyword: 'Google Ads Uganda',
+  },
+  {
+    title: 'Facebook Ads',
+    description: 'Reach millions of Ugandans on the platforms they use every day.',
+    href: '/services/facebook-ads-uganda/',
+    iconId: 'i-ads',
+    keyword: 'Facebook ads Uganda',
+  },
+];
+
+const stats = [
+  { value: '60+',  label: 'Websites and apps launched',  desc: 'Business sites, online shops and mobile apps delivered for clients in Uganda.' },
+  { value: '40+',  label: 'Clients served',              desc: 'From Kampala start-ups to established companies in Entebbe, Jinja and Mbarara.' },
+  { value: '24h',  label: 'Reply time',                  desc: 'Message us on WhatsApp or the form and a real person answers within one working day.' },
+  { value: '5+',   label: 'Years in business',            desc: "Hands-on experience with Uganda's mobile networks, payments and search habits." },
+];
+
+const whyItems = [
+  {
+    icon: 'i-phone',
+    title: 'Built for Uganda',
+    desc: 'Fast on mobile data, compatible with MTN MoMo and Airtel Money, and ready for customers who prefer to message on WhatsApp.',
+  },
+  {
+    icon: 'i-search',
+    title: 'Search-first from day one',
+    desc: 'Every page is planned around the words people in Uganda actually type into Google, so you get found on Search and Maps.',
+  },
+  {
+    icon: 'i-receipt',
+    title: 'Clear, fixed pricing',
+    desc: 'You get a written quote and a package before we start. No surprise invoices halfway through.',
+  },
+  {
+    icon: 'i-layers',
+    title: 'One team for the whole funnel',
+    desc: 'Website, SEO and ads under one roof, so every shilling of ad spend lands on a page built to turn visitors into customers.',
+  },
+  {
+    icon: 'i-chat',
+    title: 'Local and easy to reach',
+    desc: 'A Kampala team that answers on WhatsApp and replies to every message within 24 hours.',
+  },
+];
+
+const painPoints = [
+  'My website is slow on phones',
+  "I don't show up on Google",
+  'Nobody finds me on Google Maps',
+  'I pay for ads and get no leads',
+  'My site looks outdated',
+  'Customers message on WhatsApp, not my site',
+  'I cannot update my website myself',
+  'My agency never explains the results',
+];
+
+const testimonials = [
+  {
+    quote: 'Our phone started ringing the week the new site went live. We now get most of our bookings from Google.',
+    author: 'Owner, restaurant in Ntinda',
+  },
+  {
+    quote: 'They explained every shilling of the ad budget and sent a report I could actually understand.',
+    author: 'Marketing manager, logistics company',
+  },
+  {
+    quote: 'I update my own prices and photos now. I do not need to call anyone for small changes.',
+    author: 'Founder, retail shop in Entebbe',
+  },
+];
+
+const sectors = ['Restaurants', 'Clinics', 'Schools', 'Real estate', 'Logistics', 'Hotels and lodges', 'Retail shops', 'NGOs'];
+---
+
+<BaseLayout
+  title="Web Design & Digital Marketing Agency Kampala | KTM"
+  description="KTM is Kampala's full-service digital agency. We build websites, develop apps, run Google Ads, Facebook Ads and SEO for businesses across Uganda. Get a free quote."
+>
+
+  <!-- 1. HERO -->
+  <Hero
+    badge="Web design and digital marketing, Kampala"
+    heading="Web Design Agency in Kampala for Growing Brands."
+    subheading="Websites, mobile apps, SEO, Google Ads and Facebook Ads for businesses across Uganda."
+    ctaPrimary={{ label: 'Get a Free Quote', href: '/contact/' }}
+    ctaSecondary={{ label: 'See Our Work', href: '/portfolio/' }}
+    variant="home"
+  />
+
+  <!-- 2. WHO WE ARE -->
+  <section class="section wrap" id="who">
+    <div class="who">
+      <span class="eyebrow"><i class="sq"></i> Who we are</span>
+      <p class="statement">
+        We build search-first websites and ad campaigns that help Kampala businesses get found,
+        <span>get calls and lead their industries.</span>
+      </p>
+      <a class="link-u who-link" href="/about/">
+        About KTM
+        <svg class="ic"><use href="#i-right"/></svg>
+      </a>
+    </div>
+
+    <!-- Showcase grid -->
+    <div class="showcase">
+      <figure class="shot shot-1">
+        <div class="phone" aria-hidden="true">
+          <span class="ph-title">Your order is 6 min away</span>
+          <div class="ph-map"></div>
+          <i class="ph-line"></i>
+          <i class="ph-line s"></i>
+          <div class="ph-btn">Track rider</div>
+        </div>
+        <figcaption>Mobile apps</figcaption>
+      </figure>
+      <figure class="shot shot-2">
+        <div class="win" aria-hidden="true">
+          <div class="win-bar"><i></i><i></i><i></i></div>
+          <div class="win-body">
+            <div class="win-hero">Fresh food,<br/>delivered in Kampala<span class="win-btn"></span></div>
+            <div class="win-grid"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <figcaption>Websites</figcaption>
+      </figure>
+      <figure class="shot shot-3">
+        <div class="serp" aria-hidden="true">
+          <div class="serp-q">best restaurant in Ntinda</div>
+          <div class="serp-hit you">
+            <b>Your business · Ntinda</b>
+            <small>&#9733; 4.9 · Open now · Order on WhatsApp</small>
+            <span></span>
+          </div>
+          <div class="serp-hit"><b>Another restaurant</b><span></span><span class="s"></span></div>
+          <div class="serp-hit"><b>Another restaurant</b><span></span><span class="s"></span></div>
+        </div>
+        <figcaption>SEO and Google Maps</figcaption>
+      </figure>
+      <figure class="shot shot-4">
+        <div class="dash" aria-hidden="true">
+          <small>LEADS · LAST 30 DAYS · SAMPLE</small>
+          <strong>128</strong>
+          <em>up on the month before</em>
+          <svg viewBox="0 0 200 70" width="100%" height="70" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ga" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ff9d22" stop-opacity=".55"/>
+                <stop offset="1" stop-color="#ff9d22" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 60 L25 54 L50 56 L75 42 L100 46 L125 30 L150 34 L175 14 L200 8 V70 H0Z" fill="url(#ga)"/>
+            <path d="M0 60 L25 54 L50 56 L75 42 L100 46 L125 30 L150 34 L175 14 L200 8" fill="none" stroke="#ff9d22" stroke-width="2"/>
+            <circle cx="200" cy="8" r="3.5" fill="#fff"/>
+          </svg>
+        </div>
+        <figcaption>Google and Facebook Ads</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3. STATS — split-flap ticker animation -->
+  <section class="wrap" aria-labelledby="stats-heading">
+    <div class="stats-head">
+      <i class="sq"></i>
+      <span class="mono" id="stats-heading">By the numbers</span>
+    </div>
+    <div class="stats" id="statsGrid">
+      {stats.map((s, i) => (
+        <div class="stat">
+          <b
+            class="stat-ticker"
+            data-value={s.value}
+            aria-label={s.value}
+          >
+            {/* Render each character as a flap slot */}
+            {s.value.split('').map(ch => (
+              ch.match(/\d/) ? (
+                <span class="flap-slot" data-digit={ch} aria-hidden="true">
+                  <span class="flap-reel">
+                    {/* 0–9 then the target digit again so it lands on target */}
+                    {['0','1','2','3','4','5','6','7','8','9', ch].map(d => (
+                      <span class="flap-face">{d}</span>
+                    ))}
+                  </span>
+                </span>
+              ) : (
+                <span class="flap-char" aria-hidden="true">{ch}</span>
+              )
+            ))}
+          </b>
+          <h3>{s.label}</h3>
+          <p>{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4. SERVICES -->
+  <section class="wrap section" id="services" style="padding-bottom:0">
+    <div class="dark">
+      <div class="dark-wrap">
+        <div class="svc-head">
+          <div>
+            <span class="eyebrow"><i class="sq"></i> Services</span>
+            <h2 class="h2">What <span class="chip-img" aria-hidden="true"></span> We Do</h2>
+          </div>
+          <p>Everything your business needs online, from the website to the ads that bring people to it.</p>
+        </div>
+        <div class="svc-grid">
+          <!-- Service list -->
+          <div class="svc-list" id="svcList">
+            {[
+              { title:'Web Design',      href:'/services/web-design-kampala/',      kw:'website design Kampala',    g1:'#ff5a3c', g2:'#7a1409', items:'Mobile-first pages that load fast on mobile data|Hosting and domain set up for you|Easy to edit without calling a developer|Built to be found on Google from day one' },
+              { title:'Web Development', href:'/services/web-development-uganda/',  kw:'web development Uganda',    g1:'#6b5bd6', g2:'#1a1240', items:'E-commerce with MoMo and card payments|Booking systems and customer portals|Dashboards and custom APIs|Tested before every launch' },
+              { title:'App Development', href:'/services/app-development-uganda/',  kw:'mobile app development Uganda', g1:'#ff3d6e', g2:'#4a0a1f', items:'Android, iOS or both from one build|Delivery, booking and e-commerce apps|Wireframes you approve before we code|Maintenance after launch' },
+              { title:'SEO Services',    href:'/services/seo-services-uganda/',     kw:'SEO services Uganda',       g1:'#2fa58d', g2:'#07322b', items:'Local SEO and Google Maps listing|On-page and technical fixes|Link building from relevant sites|A clear monthly report you can read' },
+              { title:'Google Ads',      href:'/services/google-ads-uganda/',       kw:'Google Ads Uganda',         g1:'#ffb02e', g2:'#7a3a05', items:'Keyword research for your market|Ad copy written and tested|Bid management and budget control|Conversion tracking and reports' },
+              { title:'Facebook Ads',    href:'/services/facebook-ads-uganda/',     kw:'Facebook ads Uganda',       g1:'#3d7bff', g2:'#0c1e55', items:'Audience targeting by location and interest|Ad graphics and copy made for you|A/B testing and retargeting|Lead, traffic and sales campaigns' },
+            ].map((svc, i) => (
+              <a
+                class:list={['svc', i === 0 && 'is-active']}
+                href={svc.href}
+                data-title={svc.title}
+                data-kw={svc.kw}
+                data-g1={svc.g1}
+                data-g2={svc.g2}
+                data-items={svc.items}
+              >
+                <span>
+                  <span class="svc-name">{svc.title}</span>
+                </span>
+                <span class="svc-kw mono">{svc.kw}</span>
+                <svg class="ic"><use href="#i-arrow"/></svg>
+              </a>
+            ))}
+          </div>
+
+          <!-- Sticky preview panel -->
+          <aside class="preview" aria-live="polite" aria-label="Service details">
+            <div class="pv-art" id="pvArt">
+              <span class="mono" id="pvKw">website design Kampala</span>
+              <h3 id="pvTitle">Web Design</h3>
+            </div>
+            <div class="pv-body">
+              <p class="mono">What's included</p>
+              <ul id="pvList">
+                <li><svg class="ic"><use href="#i-check"/></svg>Mobile-first pages that load fast on mobile data</li>
+                <li><svg class="ic"><use href="#i-check"/></svg>Hosting and domain set up for you</li>
+                <li><svg class="ic"><use href="#i-check"/></svg>Easy to edit without calling a developer</li>
+                <li><svg class="ic"><use href="#i-check"/></svg>Built to be found on Google from day one</li>
+              </ul>
+              <a class="btn btn-red" id="pvLink" href="/services/web-design-kampala/">
+                View service
+                <svg class="ic"><use href="#i-arrow"/></svg>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. WHY KTM -->
+  <section class="section wrap">
+    <div class="why">
+      <div class="why-intro">
+        <span class="eyebrow"><i class="sq"></i> Why KTM</span>
+        <h2 class="h2">Why Kampala Businesses Choose KTM</h2>
+        <p class="lead">One local team for your website, your search ranking and your ads, so the pieces work together.</p>
+        <a class="btn btn-ink btn-lg" href="/contact/" style="justify-self:start">
+          Talk to our team
+          <svg class="ic"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+      <div class="why-list">
+        {whyItems.map(item => (
+          <div class="why-item">
+            <div class="why-ic">
+              <svg class="ic"><use href={`#${item.icon}`}/></svg>
+            </div>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. PAIN POINTS -->
+  <section class="wrap" aria-labelledby="pain-heading">
+    <div class="pain">
+      <div class="pain-head">
+        <div>
+          <span class="eyebrow"><i class="sq"></i> Common problems</span>
+          <h2 class="h2" id="pain-heading">Sound Familiar?</h2>
+        </div>
+        <p class="lead">Tick what applies to you. We'll bring the fixes to your free consultation.</p>
+      </div>
+      <div class="chips">
+        {painPoints.map((point, i) => (
+          <label class="chip">
+            <input type="checkbox" id={`p${i}`} />
+            <span>{point}</span>
+          </label>
+        ))}
+      </div>
+      <div class="pain-foot">
+        <a class="btn btn-ink btn-lg" href="/contact/">
+          Get these fixed
+          <svg class="ic"><use href="#i-arrow"/></svg>
+        </a>
+        <span class="mono" id="painCount" role="status" aria-live="polite">Nothing ticked yet</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. PORTFOLIO TEASER -->
+  <section class="section wrap" id="work">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Our work</span>
+        <h2 class="h2">Recent projects</h2>
+      </div>
+      <a class="link-u" href="/portfolio/">
+        View All Projects
+        <svg class="ic"><use href="#i-right"/></svg>
+      </a>
+    </div>
+    {featuredProjects.length > 0 ? (
+      <div class="grid3">
+        {featuredProjects.map((p, i) => (
+          <PortfolioCard
+            title={p.data.title}
+            client={p.data.client}
+            serviceType={p.data.serviceType}
+            industry={p.data.industry}
+            slug={p.id}
+            image={p.data.image}
+            result={p.data.results[0]}
+            index={i}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="grid3">
+        <a class="proj" href="/portfolio/">
+          <div class="proj-art pa1">
+            <span class="tagsample">Coming soon</span>
+          </div>
+          <div class="proj-meta"><h3>Lakeside Dental</h3><span class="pill">Web design + SEO</span></div>
+          <p>A booking-ready website that shows up first for dentists near Kololo.</p>
+        </a>
+        <a class="proj" href="/portfolio/">
+          <div class="proj-art pa2">
+            <span class="tagsample">Coming soon</span>
+          </div>
+          <div class="proj-meta"><h3>SwiftBoda</h3><span class="pill">Mobile app</span></div>
+          <p>A ride and parcel app for Android, with MoMo payments built in.</p>
+        </a>
+        <a class="proj" href="/portfolio/">
+          <div class="proj-art pa3">
+            <span class="tagsample">Coming soon</span>
+          </div>
+          <div class="proj-meta"><h3>Kololo Homes</h3><span class="pill">Google + Facebook Ads</span></div>
+          <p>Lead campaigns that send property buyers straight to WhatsApp.</p>
+        </a>
+      </div>
+    )}
+  </section>
+
+  <!-- Testimonials -->
+  <section class="wrap" aria-labelledby="quotes-heading" style="padding-bottom:clamp(64px,9vw,120px)">
+    <div class="sec-head" style="margin-bottom:32px">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Kind words</span>
+        <h2 class="h2" id="quotes-heading">What clients say</h2>
+      </div>
+    </div>
+    <div class="quotes">
+      {testimonials.map(t => (
+        <figure class="quote">
+          <p>"{t.quote}"</p>
+          <figcaption class="mono">{t.author}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- 8. AUDIT CTA -->
+  <section class="wrap" id="audit" style="padding-bottom:clamp(64px,9vw,120px)">
+    <div class="audit">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Free audit</span>
+        <h2 class="h2">Get a Free Website and Marketing Audit</h2>
+        <p>Send us your website address. We'll check speed, mobile layout, Google visibility and your ads, then tell you what to fix first.</p>
+      </div>
+      <form class="form" id="auditForm" novalidate>
+        <div class="field">
+          <label for="a-site">Business or website</label>
+          <input id="a-site" type="text" placeholder="yourbusiness.co.ug" autocomplete="url" />
+        </div>
+        <div class="field">
+          <label for="a-wa">WhatsApp number</label>
+          <input id="a-wa" type="tel" placeholder="+256 753 784 595" autocomplete="tel" />
+        </div>
+        <button class="btn btn-red btn-lg" type="submit">
+          Request my audit
+          <svg class="ic"><use href="#i-arrow"/></svg>
+        </button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Blog Teaser -->
+  {latestPosts.length > 0 && (
+    <section class="section wrap" id="blog">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow"><i class="sq"></i> Blog</span>
+          <h2 class="h2">Practical advice for Ugandan businesses</h2>
+        </div>
+        <a class="link-u" href="/blog/">
+          Read All Articles
+          <svg class="ic"><use href="#i-right"/></svg>
+        </a>
+      </div>
+      <div class="grid3">
+        {latestPosts.map(post => (
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            category={post.data.category}
+            slug={post.id}
+            image={post.data.image}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+</BaseLayout>
+
+<script>
+// Services preview panel
+const svcs = Array.from(document.querySelectorAll<HTMLElement>('.svc'));
+const art  = document.getElementById('pvArt')!;
+const kw   = document.getElementById('pvKw')!;
+const ttl  = document.getElementById('pvTitle')!;
+const list = document.getElementById('pvList')!;
+const link = document.getElementById('pvLink') as HTMLAnchorElement;
+
+function showService(el: HTMLElement) {
+  svcs.forEach(s => s.classList.toggle('is-active', s === el));
+  art.style.setProperty('--g1', el.dataset.g1!);
+  art.style.setProperty('--g2', el.dataset.g2!);
+  kw.textContent  = el.dataset.kw!;
+  ttl.textContent = el.dataset.title!;
+  list.innerHTML  = (el.dataset.items ?? '').split('|').map(t =>
+    `<li><svg class="ic"><use href="#i-check"/></svg>${t}</li>`
+  ).join('');
+  link.href = el.dataset.href ?? '#';
+}
+
+svcs.forEach(s => {
+  s.addEventListener('mouseenter', () => showService(s));
+  s.addEventListener('focus',      () => showService(s));
+});
+
+// Pain point counter
+const boxes  = Array.from(document.querySelectorAll<HTMLInputElement>('.chip input'));
+const output = document.getElementById('painCount')!;
+
+function updateCount() {
+  const n = boxes.filter(b => b.checked).length;
+  output.textContent = n === 0
+    ? 'Nothing ticked yet'
+    : `${n} problem${n === 1 ? '' : 's'} ticked`;
+}
+boxes.forEach(b => b.addEventListener('change', updateCount));
+
+// Audit form
+const form = document.getElementById('auditForm') as HTMLFormElement;
+const msg  = document.getElementById('formMsg')!;
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const site = (document.getElementById('a-site') as HTMLInputElement).value.trim();
+  const wa   = (document.getElementById('a-wa')   as HTMLInputElement).value.trim();
+  if (!site || !wa) {
+    msg.textContent = 'Please add your website and WhatsApp number so we can reply.';
+    return;
+  }
+  msg.textContent = 'Thanks! We will review your site and reply on WhatsApp within 24 hours.';
+  form.reset();
+});
+</script>
+
+<style>
+/* ── SPLIT-FLAP STAT TICKER ─────────────────────────────────── */
+
+/* Each stat number is a flex row of slots + plain chars */
+.stat-ticker {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.8rem, 5.4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Plain chars like + or h */
+.flap-char {
+  display: inline-block;
+}
+
+/* One digit slot — clips the scrolling reel */
+.flap-slot {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;          /* matches the line-height */
+  vertical-align: top;
+}
+
+/* The reel: a column of 11 faces (0-9 + target) stacked vertically */
+.flap-reel {
+  display: flex;
+  flex-direction: column;
+  /* Default state: show the first face (0) */
+  transform: translateY(0);
+  transition: none;     /* JS controls the transition */
+}
+
+/* Each individual digit face */
+.flap-face {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
+/* Fired by JS when in view — rolls to the target face */
+.flap-slot.is-done .flap-reel {
+  /* translateY to the 11th face (index 10 = the target digit copy)
+     Each face is 1em tall, so index 10 = -10em */
+  transform: translateY(-10em);
+}
+</style>
+
+<script>
+// ── SPLIT-FLAP TICKER ─────────────────────────────────────────
+// Each digit slot rolls through 0-9 then lands on the target digit.
+// The reel has 11 faces: 0,1,2,3,4,5,6,7,8,9,TARGET
+// So the final position is always -10em (10 faces up).
+// We stagger each stat card and each digit within a card.
+
+(function () {
+  const DURATION  = 600;  // ms for each digit reel to finish rolling
+  const STAGGER_CARD  = 120; // ms between each stat card starting
+  const STAGGER_DIGIT = 60;  // ms between each digit within a card
+
+  function animateStat(card: Element, cardDelay: number) {
+    const slots = card.querySelectorAll<HTMLElement>('.flap-slot');
+    slots.forEach((slot, di) => {
+      const delay = cardDelay + di * STAGGER_DIGIT;
+      setTimeout(() => {
+        const reel = slot.querySelector<HTMLElement>('.flap-reel')!;
+        // Apply cubic-bezier that decelerates — feels mechanical
+        reel.style.transition = `transform ${DURATION}ms cubic-bezier(0.22, 1, 0.36, 1)`;
+        slot.classList.add('is-done');
+      }, delay);
+    });
+  }
+
+  // Trigger when the stats grid enters the viewport
+  const grid = document.getElementById('statsGrid');
+  if (!grid) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        const cards = grid.querySelectorAll<HTMLElement>('.stat');
+        cards.forEach((card, ci) => {
+          animateStat(card, ci * STAGGER_CARD);
+        });
+      });
+    },
+    { threshold: 0.25 }
+  );
+
+  observer.observe(grid);
+})();
+</script>

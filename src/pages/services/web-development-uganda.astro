@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+
+const clusterPosts = [
+  {
+    title: 'How Much Does a Website Cost in Uganda?',
+    slug: 'how-much-does-a-website-cost-in-uganda',
+    description: 'A clear breakdown of Uganda web design and development pricing — from simple sites to custom platforms.',
+    readTime: '6 min read',
+  },
+  {
+    title: 'How to Choose a Web Design Company in Uganda',
+    slug: 'how-to-choose-a-web-design-company-in-uganda',
+    description: 'What to look for, what questions to ask and what red flags to avoid when hiring a web agency in Uganda.',
+    readTime: '6 min read',
+  },
+  {
+    title: 'What is Local SEO? A Guide for Kampala Businesses',
+    slug: 'what-is-local-seo-guide-for-kampala-businesses',
+    description: 'A well-built website is step one. Here\'s how local SEO makes sure people in Uganda can find it.',
+    readTime: '7 min read',
+  },
+];
+
+const builds = [
+  { title:'E-commerce stores',        desc:'Online shops with MoMo, Airtel Money and card payments. Built on WooCommerce or custom Astro.' },
+  { title:'Booking systems',          desc:'Appointment and reservation platforms for clinics, salons, hotels and logistics companies.' },
+  { title:'Business portals',         desc:'Internal dashboards, CRM systems and client-facing portals with role-based access.' },
+  { title:'Custom web applications',  desc:'Anything that does not fit a template. We scope, design and build from scratch.' },
+  { title:'APIs and integrations',    desc:'Connect your website to payment gateways, SMS services, WhatsApp Business and third-party tools.' },
+  { title:'Maintenance and support',  desc:'Monthly retainers for updates, security patches and feature additions after launch.' },
+];
+
+const technologies = [
+  'Astro', 'React', 'Next.js', 'Node.js', 'PHP', 'WordPress', 'WooCommerce', 'PostgreSQL', 'Supabase', 'Cloudflare',
+];
+
+const faqs = [
+  { question:'What types of websites can you develop?', answer:'We build e-commerce stores, booking systems, business portals, informational sites, and fully custom web applications. If you have a specific workflow in mind, tell us during the discovery call and we will scope it out.' },
+  { question:'How long does web development take?', answer:'A standard e-commerce or booking site takes 4 to 8 weeks. Complex custom applications can take longer. We agree a timeline in writing before starting.' },
+  { question:'Can you integrate MTN MoMo and Airtel Money payments?', answer:'Yes. We integrate local payment gateways including MTN MoMo, Airtel Money and Pesapal for card payments, so Ugandan customers can pay the way they prefer.' },
+  { question:'Do you work with existing websites?', answer:'Yes. We can take over an existing site, redesign it, add new functionality or migrate it to a faster, more secure platform.' },
+  { question:'What happens after launch?', answer:'We offer monthly maintenance retainers covering security updates, backups, performance monitoring and minor feature additions.' },
+];
+---
+
+<BaseLayout
+  title="Web Development Company Uganda | Custom Systems & Apps | KTM"
+  description="Custom web development in Uganda. KTM builds e-commerce stores, booking systems, portals and web applications for businesses in Kampala. Free consultation."
+>
+  <Hero
+    badge="Web Development · Uganda"
+    heading="Custom Web Development in Uganda."
+    subheading="E-commerce stores, booking systems, business portals and custom web applications built for Ugandan businesses."
+    ctaPrimary={{ label:'Discuss your project', href:'/contact/' }}
+    ctaSecondary={{ label:'See our work', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- What we build -->
+  <section class="section wrap" aria-labelledby="dev-builds-heading">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> What we build</span>
+        <h2 class="h2" id="dev-builds-heading">Custom systems for every business type</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      {builds.map(b => (
+        <div style="padding:28px;border-radius:22px;border:1px solid var(--line);display:grid;gap:10px;align-content:start">
+          <h3 style="font-size:1.1rem;font-weight:500;letter-spacing:-.02em">{b.title}</h3>
+          <p style="font-size:14px;color:var(--muted-text);line-height:1.5">{b.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Technologies -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <span class="eyebrow" style="margin-bottom:20px;display:inline-flex"><i class="sq"></i> Technologies</span>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      {technologies.map(t => (
+        <span style="padding:8px 18px;border-radius:999px;border:1px solid var(--line);font-size:14px;font-weight:500">{t}</span>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <div class="wrap">
+    <FAQ items={faqs} heading="Web Development in Uganda: Common Questions" />
+  </div>
+
+  <!-- Related cluster posts -->
+  <div class="wrap">
+    <RelatedPosts heading="Web Development Resources" posts={clusterPosts} />
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Ready to build?"
+      heading="Tell us what you want to build"
+      subheading="We will scope your project, give you a fixed price and start within days of your approval."
+      ctaLabel="Start a project"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>

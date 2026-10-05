@@ -1,0 +1,515 @@
+---
+export interface Props {
+  badge?: string;
+  heading: string;
+  subheading: string;
+  ctaPrimary: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+  trust?: string;
+  /**
+   * 'home'  = full-bleed black with red glow, full-width H1, sector bar
+   * 'light' = white page header for inner pages
+   */
+  variant?: 'home' | 'dark' | 'light';
+}
+
+const {
+  badge,
+  heading,
+  subheading,
+  ctaPrimary,
+  ctaSecondary,
+  trust,
+  variant = 'home',
+} = Astro.props;
+
+const sectors = [
+  'Restaurants', 'Clinics', 'Schools',
+  'Real estate', 'Logistics', 'Hotels and lodges', 'Retail',
+];
+---
+
+{variant === 'home' || variant === 'dark' ? (
+
+  <section class="hh" aria-label="Hero">
+
+    <!-- Red radial glow — bottom right, aria hidden -->
+    <div class="hh-glow" aria-hidden="true"></div>
+
+    <div class="hh-wrap">
+
+      <!-- Badge -->
+      {badge && (
+        <div class="hh-badge">
+          <span class="hh-dot" aria-hidden="true"></span>
+          {badge}
+        </div>
+      )}
+
+      <!-- Full-width H1: static SEO anchor + cycling service word -->
+      <h1 class="hh-h1" id="hero-h1">
+        <!-- Static part — always in the DOM for Google -->
+        <span class="hh-h1-static">Web Design Agency<br/>in Kampala for</span>
+        <!-- Cycling part — JS swaps the visible word -->
+        <span class="hh-h1-cycle" id="heroCycle" aria-live="polite" aria-atomic="true">
+          <span class="hh-cycle-track" id="heroCycleTrack">
+            <span class="hh-cycle-word">Growing Brands.</span>
+            <span class="hh-cycle-word">SEO Services.</span>
+            <span class="hh-cycle-word">Google Ads.</span>
+            <span class="hh-cycle-word">Facebook Ads.</span>
+            <span class="hh-cycle-word">Mobile Apps.</span>
+            <span class="hh-cycle-word">Your Business.</span>
+          </span>
+        </span>
+      </h1>
+
+      <!-- Sub-row: description left, CTAs right -->
+      <div class="hh-subrow">
+        <p class="hh-sub">{subheading}</p>
+        <div class="hh-btns">
+          <a class="hh-btn-red" href={ctaPrimary.href}>
+            {ctaPrimary.label}
+            <svg class="hh-ic" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 13 13 3M5 3h8v8"/></svg>
+          </a>
+          {ctaSecondary && (
+            <a class="hh-btn-outline" href={ctaSecondary.href}>
+              {ctaSecondary.label}
+              <svg class="hh-ic" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 13 13 3M5 3h8v8"/></svg>
+            </a>
+          )}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom sector bar -->
+    <div class="hh-bar">
+      <div class="hh-bar-inner">
+        <span class="hh-bar-label">Built for businesses<br/>across Uganda</span>
+
+        <!-- Marquee: two copies of the list for seamless loop -->
+        <div class="hh-marquee" aria-hidden="true">
+          <ul class="hh-track" role="list">
+            {sectors.map(s => <li>{s}</li>)}
+          </ul>
+          <ul class="hh-track" role="list" aria-hidden="true">
+            {sectors.map(s => <li>{s}</li>)}
+          </ul>
+        </div>
+
+        <!-- Accessible fallback: visible to screen readers, hidden visually -->
+        <ul class="hh-sectors-sr" role="list">
+          {sectors.map(s => <li>{s}</li>)}
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+) : (
+
+  /* ── LIGHT VARIANT — inner pages ─────────────────────────── */
+  <section class="hero-light">
+    {badge && (
+      <span class="eyebrow" style="margin-bottom:16px;display:inline-flex">
+        <i class="sq"></i> {badge}
+      </span>
+    )}
+    <h1 class="hero-light-h1">{heading}</h1>
+    <p class="hero-light-sub">{subheading}</p>
+    <div class="hero-light-btns">
+      <a class="hh-btn-red" href={ctaPrimary.href}>
+        {ctaPrimary.label}
+        <svg class="hh-ic" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 13 13 3M5 3h8v8"/></svg>
+      </a>
+      {ctaSecondary && (
+        <a class="hh-btn-ink" href={ctaSecondary.href}>
+          {ctaSecondary.label}
+          <svg class="hh-ic" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+      )}
+    </div>
+  </section>
+
+)}
+
+<style>
+/* ─── ICON ─────────────────────────────────────────────────── */
+.hh-ic {
+  width: 14px; height: 14px;
+  flex-shrink: 0;
+}
+
+/* ─── BUTTONS (shared) ─────────────────────────────────────── */
+.hh-btn-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: #D93225;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, transform .15s;
+}
+.hh-btn-red:hover { background: #bf2b1f; transform: translateY(-1px); }
+
+.hh-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: #fff;
+  color: #0B0A0A;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, transform .15s;
+}
+.hh-btn-outline:hover { background: #e8e8e8; transform: translateY(-1px); }
+
+.hh-btn-ink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .15s, transform .15s;
+}
+.hh-btn-ink:hover { opacity: .88; transform: translateY(-1px); }
+
+/* ─── HOME HERO SHELL ──────────────────────────────────────── */
+.hh {
+  position: relative;
+  isolation: isolate;
+  background: #0B0A0A;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  /* full viewport minus nav */
+  min-height: calc(100svh - 68px);
+}
+
+/* Red radial glow — bottom right */
+.hh-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 70% 60% at 85% 110%,
+    rgba(180, 20, 10, 0.55) 0%,
+    rgba(100, 10, 5, 0.25) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ─── MAIN CONTENT AREA ────────────────────────────────────── */
+.hh-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding: clamp(40px, 6vw, 80px) clamp(16px, 3vw, 40px) clamp(32px, 4vw, 56px);
+}
+
+/* Badge */
+.hh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,.72);
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+.hh-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #D93225;
+  flex-shrink: 0;
+}
+
+/* H1 — spans the full width, very large */
+.hh-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.2rem, 9.5vw, 8.8rem);
+  line-height: .92;
+  letter-spacing: -.04em;
+  margin: 0 0 clamp(28px, 4vw, 52px);
+  max-width: none;
+}
+
+/* Static line — always visible, always indexed */
+.hh-h1-static {
+  display: block;
+}
+
+/* Cycling wrapper — clips to one word at a time.
+   Height is set in pixels by JS after measuring the rendered word,
+   so it works correctly at every viewport width. */
+.hh-h1-cycle {
+  display: block;
+  overflow: hidden;
+  height: var(--cycle-h, 1em);  /* JS sets --cycle-h on this element */
+  position: relative;
+}
+
+/* Inner track — slides vertically */
+.hh-cycle-track {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Each word sits in a row exactly one line tall */
+.hh-cycle-word {
+  display: block;
+  /* height set by JS via --cycle-h to match the measured value */
+  height: var(--cycle-h, 1em);
+  line-height: 1;
+  overflow: hidden;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* First word is white — it's the brand tagline, not a service */
+.hh-cycle-word:first-child {
+  color: #fff;
+}
+
+/* Sub-row: description left, buttons right */
+.hh-subrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: clamp(24px, 4vw, 56px);
+  flex-wrap: wrap;
+}
+
+.hh-sub {
+  font-size: clamp(.9rem, 1.3vw, 1.05rem);
+  line-height: 1.55;
+  color: rgba(255,255,255,.58);
+  max-width: 36ch;
+}
+
+.hh-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* ─── SECTOR BAR ───────────────────────────────────────────── */
+.hh-bar {
+  border-top: 1px solid rgba(255,255,255,.1);
+  background: #0B0A0A;
+}
+.hh-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  max-width: 1320px;
+  margin-inline: auto;
+  padding: 20px clamp(16px, 3vw, 40px);
+}
+.hh-bar-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  line-height: 1.4;
+  flex-shrink: 0;
+  min-width: 100px;
+}
+
+/* ── MARQUEE ────────────────────────────────────────────────── */
+.hh-marquee {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  /* Fade edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  display: flex;
+}
+
+.hh-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.5vw, 48px);
+  padding-right: clamp(24px, 3.5vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  /* Animate: translate -100% = one full list width, then loop */
+  animation: hh-scroll 18s linear infinite;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Pause on hover / reduced motion */
+.hh-marquee:hover .hh-track { animation-play-state: paused; }
+
+.hh-track li {
+  font-size: clamp(13px, 1.4vw, 16px);
+  font-weight: 600;
+  color: rgba(255,255,255,.85);
+  letter-spacing: -.01em;
+  /* Dot separator after each item */
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3.5vw, 48px);
+}
+.hh-track li::after {
+  content: "·";
+  color: rgba(255,255,255,.25);
+  font-size: 1.2em;
+  font-weight: 400;
+}
+.hh-track li:last-child::after { display: none; }
+
+@keyframes hh-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* SR-only fallback */
+.hh-sectors-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ─── LIGHT HERO (inner pages) ─────────────────────────────── */
+.hero-light {
+  padding: clamp(56px, 8vw, 112px) clamp(16px, 3vw, 40px) clamp(32px, 4vw, 56px);
+  max-width: 1320px;
+  margin-inline: auto;
+}
+.hero-light-h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+  max-width: 16em;
+  text-wrap: balance;
+  margin-bottom: 20px;
+}
+.hero-light-sub {
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--muted-text);
+  max-width: 52ch;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.hero-light-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .hh { min-height: unset; }
+  .hh-subrow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .hh-btn-red,
+  .hh-btn-outline { height: 48px; padding: 0 22px; font-size: 14px; }
+  .hh-bar-inner { gap: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hh-btn-red, .hh-btn-outline, .hh-btn-ink { transition: none; }
+  .hh-track { animation: none; }
+  .hh-cycle-track { transition: none; }
+}
+</style>
+
+<script>
+// ── HERO CYCLING HEADLINE ─────────────────────────────────────
+(function () {
+  const cycle = document.getElementById('heroCycle') as HTMLElement | null;
+  const track = document.getElementById('heroCycleTrack') as HTMLElement | null;
+  if (!cycle || !track) return;
+
+  const words = Array.from(track.querySelectorAll<HTMLElement>('.hh-cycle-word'));
+  const total = words.length;
+  let index   = 0;
+
+  // ── Measure the real rendered height of the first word ───────
+  // This handles every viewport width correctly.
+  function getWordHeight(): number {
+    return words[0].getBoundingClientRect().height || words[0].offsetHeight;
+  }
+
+  function applyHeight() {
+    const h = getWordHeight();
+    // Set on both the clip wrapper and each word so they always match
+    cycle.style.setProperty('--cycle-h', `${h}px`);
+    track.style.setProperty('--cycle-h', `${h}px`);
+  }
+
+  // Apply immediately and on every resize
+  applyHeight();
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyHeight, 60);
+  }, { passive: true });
+
+  // ── Advance one step ─────────────────────────────────────────
+  function advance() {
+    index = (index + 1) % total;
+    const h = getWordHeight();
+    track.style.transform = `translateY(${-index * h}px)`;
+
+    // When looping back to 0: wait for transition then snap silently
+    if (index === 0) {
+      setTimeout(() => {
+        track.style.transition = 'none';
+        track.style.transform  = 'translateY(0)';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            track.style.transition = '';
+          });
+        });
+      }, 580);
+    }
+  }
+
+  setInterval(advance, 2600);
+})();
+</script>
+</style>

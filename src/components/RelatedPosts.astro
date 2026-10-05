@@ -1,0 +1,144 @@
+---
+/**
+ * RelatedPosts.astro
+ * Displays a cluster of related blog posts on service pillar pages.
+ * Drives internal linking between pillar pages and supporting content.
+ *
+ * Props:
+ *   heading  — section heading (default "From the Blog")
+ *   posts    — array of { title, slug, description, readTime? }
+ */
+export interface Props {
+  heading?: string;
+  posts: {
+    title: string;
+    slug: string;
+    description: string;
+    readTime?: string;
+  }[];
+}
+
+const { heading = 'From the Blog', posts } = Astro.props;
+---
+
+<section class="rp-section">
+  <div class="rp-header">
+    <span class="eyebrow"><i class="sq"></i> {heading}</span>
+    <a class="link-u" href="/blog/">
+      All articles
+      <svg class="ic" aria-hidden="true"><use href="#i-right"/></svg>
+    </a>
+  </div>
+
+  <div class="rp-grid">
+    {posts.map((post, i) => (
+      <a class="rp-card" href={`/blog/${post.slug}/`}>
+        <span class="rp-num" aria-hidden="true">0{i + 1}</span>
+        <div class="rp-body">
+          <h3 class="rp-title">{post.title}</h3>
+          <p class="rp-desc">{post.description}</p>
+        </div>
+        <div class="rp-foot">
+          {post.readTime && <span class="rp-read">{post.readTime}</span>}
+          <svg class="rp-arrow" aria-hidden="true" viewBox="0 0 16 16" fill="none"
+               stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M3 13 13 3M5 3h8v8"/>
+          </svg>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+.rp-section {
+  padding-block: clamp(48px, 7vw, 96px);
+}
+
+.rp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.rp-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 28px 24px;
+  background: var(--bg);
+  text-decoration: none;
+  color: var(--fg);
+  transition: background .15s;
+}
+.rp-card:hover { background: var(--surface); }
+.rp-card:hover .rp-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+.rp-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--accent);
+}
+
+.rp-body { display: grid; gap: 8px; }
+
+.rp-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.rp-card:hover .rp-title {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+
+.rp-desc {
+  font-size: 13.5px;
+  color: var(--muted-text);
+  line-height: 1.5;
+  max-width: 44ch;
+}
+
+.rp-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.rp-read {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rp-arrow {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  transition: color .15s, transform .15s;
+}
+</style>

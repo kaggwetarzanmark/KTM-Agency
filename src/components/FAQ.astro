@@ -1,0 +1,93 @@
+---
+export interface Props {
+  items: { question: string; answer: string }[];
+  heading?: string;
+}
+
+const { items, heading = 'Frequently Asked Questions' } = Astro.props;
+
+// FAQPage schema for Google rich snippets
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section class="faq-section">
+  <span class="eyebrow" style="margin-bottom:16px;display:inline-flex">
+    <i class="sq"></i> FAQ
+  </span>
+  <h2 class="h2" style="margin-bottom:36px">{heading}</h2>
+
+  <div class="faq-list">
+    {items.map((item, i) => (
+      <details class="faq-item" id={`faq-${i}`}>
+        <summary class="faq-q">
+          <span>{item.question}</span>
+          <svg class="ic faq-icon" aria-hidden="true">
+            <use href="#i-down"/>
+          </svg>
+        </summary>
+        <div class="faq-a">
+          <p>{item.answer}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+.faq-section { padding-block: clamp(48px,7vw,96px); }
+
+.faq-list { display: grid; gap: 0; }
+
+.faq-item {
+  border-top: 1px dotted var(--line);
+}
+.faq-item:last-child { border-bottom: 1px dotted var(--line); }
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-block: 22px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q:hover { color: var(--accent); }
+
+.faq-icon {
+  width: 20px; height: 20px;
+  flex-shrink: 0;
+  transition: transform .25s;
+  color: var(--muted);
+}
+details[open] .faq-icon { transform: rotate(180deg); color: var(--accent); }
+
+.faq-a {
+  padding-bottom: 24px;
+  padding-right: clamp(24px, 5%, 64px);
+}
+.faq-a p {
+  font-size: 15px;
+  color: var(--muted-text);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+</style>

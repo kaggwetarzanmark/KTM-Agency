@@ -1,0 +1,135 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  schema?: object;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/images/og-default.jpg',
+  ogType = 'website',
+  schema,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl    = 'https://ktmagency.ug';
+const pageUrl    = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': siteUrl,
+  name: 'KTM Agency',
+  description: 'Full-service web design, development, SEO, Google Ads, Facebook Ads and mobile app development agency based in Kampala, Uganda.',
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.png`,
+  telephone: '+256753784595',
+  email: 'hello@ktmagency.ug',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kampala',
+    addressRegion: 'Central',
+    addressCountry: 'UG',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 0.3476,
+    longitude: 32.5825,
+  },
+  areaServed: { '@type': 'Country', name: 'Uganda' },
+  sameAs: [
+    'https://www.facebook.com/ktmagency',
+    'https://www.instagram.com/ktmagency',
+    'https://www.linkedin.com/company/ktmagency',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content={ogType} />
+    <meta property="og:url"         content={pageUrl} />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={ogImageUrl} />
+    <meta property="og:locale"      content="en_UG" />
+    <meta property="og:site_name"   content="KTM Agency" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Organisation schema on every page -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+
+    <!-- Page-specific schema (service pages, blog posts etc.) -->
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  </head>
+
+  <body>
+    <!-- SVG sprite — referenced by all components via <use href="#i-*"> -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-arrow"   viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5"/></symbol>
+      <symbol id="i-right"   viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-down"    viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></symbol>
+      <symbol id="i-menu"    viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
+      <symbol id="i-close"   viewBox="0 0 24 24"><path d="M6 6l12 12M18 6l-12 12"/></symbol>
+      <symbol id="i-check"   viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></symbol>
+      <symbol id="i-phone"   viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></symbol>
+      <symbol id="i-search"  viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.2-4.2"/></symbol>
+      <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></symbol>
+      <symbol id="i-layers"  viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+      <symbol id="i-chat"    viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+      <symbol id="i-spark"   viewBox="0 0 34 34"><path d="M17 3v28M3 17h28M7 7l20 20M27 7 7 27" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="i-globe"   viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18M3 12h18"/></symbol>
+      <symbol id="i-code"    viewBox="0 0 24 24"><path d="M8 6 3 12l5 6M16 6l5 6-5 6"/></symbol>
+      <symbol id="i-mobile"  viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></symbol>
+      <symbol id="i-trend"   viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 9-9M21 7v6h-6"/></symbol>
+      <symbol id="i-ads"     viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M8 15V9l8 3-8 3z"/></symbol>
+    </svg>
+
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+  </body>
+</html>

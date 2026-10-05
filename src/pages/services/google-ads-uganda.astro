@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+
+const clusterPosts = [
+  {
+    title: 'Google Ads vs SEO: Which is Better for Uganda Businesses?',
+    slug: 'google-ads-vs-seo-uganda',
+    description: 'An honest comparison of both strategies so you can choose what works best for your Uganda business.',
+    readTime: '7 min read',
+  },
+  {
+    title: 'How Much Does Google Ads Cost in Uganda?',
+    slug: 'google-ads-budget-guide-uganda',
+    description: 'A practical breakdown of Google Ads costs — what you need to spend and how to make your budget go further.',
+    readTime: '7 min read',
+  },
+  {
+    title: 'What is Local SEO? A Guide for Kampala Businesses',
+    slug: 'what-is-local-seo-guide-for-kampala-businesses',
+    description: 'Understand how local SEO and Google Ads work together to drive leads for Uganda businesses.',
+    readTime: '7 min read',
+  },
+];
+
+const included = [
+  { icon:'i-search',  title:'Keyword research',       desc:'We find the exact search terms your ideal customers use and build campaigns around high-intent queries.' },
+  { icon:'i-layers',  title:'Ad copy writing',         desc:'Compelling headlines and descriptions written and A/B tested to maximise your click-through rate.' },
+  { icon:'i-receipt', title:'Bid management',          desc:'Daily monitoring of bids and budgets to get the most leads at the lowest possible cost per click.' },
+  { icon:'i-trend',   title:'Conversion tracking',     desc:'We set up Google Analytics and conversion tracking so you can see exactly which ads bring leads.' },
+  { icon:'i-globe',   title:'Landing page advice',     desc:'Recommendations on your landing pages so the traffic we send actually converts into customers.' },
+  { icon:'i-chat',    title:'Monthly reporting',       desc:'A clear report every month: impressions, clicks, conversions, cost per lead and recommendations.' },
+];
+
+const faqs = [
+  { question:'How much does Google Ads cost in Uganda?', answer:'You control the budget. We recommend starting with at least UGX 300K to 500K per month in ad spend to get meaningful data. Our management fee is separate from your ad budget. We give you a full cost breakdown in your quote.' },
+  { question:'How quickly will I see results from Google Ads?', answer:'Google Ads can start sending traffic within 24 hours of launching. Most accounts show meaningful lead volume within the first two weeks. Unlike SEO, results are immediate.' },
+  { question:'What is the minimum budget for Google Ads in Uganda?', answer:'You can start Google Ads with any budget, but we recommend at least UGX 300K per month in ad spend to generate enough data to optimise properly. Very small budgets often do not produce enough volume to improve.' },
+  { question:'What is the difference between Google Ads and SEO?', answer:"Google Ads are paid listings that appear at the top of search results immediately. SEO builds free, organic rankings over time. Ads stop sending traffic the moment your budget runs out. Most businesses benefit from running both: ads for immediate leads, SEO for long-term growth." },
+  { question:'Do you manage the ads or just set them up?', answer:'We do both. Our service covers full campaign setup and ongoing monthly management: monitoring, optimising bids, testing new ad copy, adjusting targeting and reporting. You do not need to touch anything.' },
+];
+---
+
+<BaseLayout
+  title="Google Ads Agency Uganda | PPC Management Kampala | KTM"
+  description="Drive instant leads with Google Ads in Uganda. KTM manages PPC campaigns for Kampala businesses — targeted ads, lower costs, more conversions. Free audit."
+>
+  <Hero
+    badge="Google Ads · Uganda"
+    heading="Google Ads Management in Uganda."
+    subheading="Paid search campaigns that bring buyers to your business immediately. Managed by a Kampala team who understands the Ugandan market."
+    ctaPrimary={{ label:'Get a free Google Ads audit', href:'/contact/' }}
+    ctaSecondary={{ label:'See our results', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- What Google Ads does -->
+  <section class="section wrap">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:center" class="ads-split">
+      <div style="display:grid;gap:20px">
+        <span class="eyebrow"><i class="sq"></i> How it works</span>
+        <h2 class="h2">Immediate leads while your SEO builds</h2>
+        <p style="font-size:15px;color:var(--muted-text);line-height:1.6">
+          Google Ads puts your business at the top of search results the moment someone in Uganda searches for
+          what you sell. You only pay when someone clicks. That means your budget goes directly to
+          potential customers, not to reaching people who have no interest.
+        </p>
+        <p style="font-size:15px;color:var(--muted-text);line-height:1.6">
+          Poorly managed campaigns waste money. Our team optimises bids, tests ad copy and
+          adjusts targeting every week so your cost per lead keeps falling.
+        </p>
+      </div>
+      <div style="background:var(--surface);border-radius:22px;padding:32px;display:grid;gap:16px">
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;color:var(--accent);text-transform:uppercase">Why Google Ads</p>
+        {[
+          { icon:'i-trend',   t:'Results from day one, not months from now' },
+          { icon:'i-receipt', t:'You only pay when someone clicks your ad' },
+          { icon:'i-search',  t:'Target people actively searching for your service' },
+          { icon:'i-layers',  t:'Set your own daily budget with no surprises' },
+        ].map(f => (
+          <div style="display:flex;gap:14px;align-items:flex-start;padding-block:14px;border-bottom:1px dashed var(--line)">
+            <svg class="ic" style="color:var(--accent);margin-top:2px;flex-shrink:0"><use href={`#${f.icon}`}/></svg>
+            <p style="font-size:14px">{f.t}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> What's included</span>
+        <h2 class="h2">Full campaign management</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      {included.map(item => (
+        <div style="display:grid;grid-template-columns:40px 1fr;gap:14px;padding:24px;border-radius:22px;border:1px solid var(--line);align-items:start">
+          <div style="width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center">
+            <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href={`#${item.icon}`}/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px">{item.title}</h3>
+            <p style="font-size:13.5px;color:var(--muted-text);line-height:1.5">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="wrap">
+    <FAQ items={faqs} heading="Google Ads in Uganda: Common Questions" />
+  </div>
+
+  <!-- Related cluster posts -->
+  <div class="wrap">
+    <RelatedPosts heading="Google Ads Resources" posts={clusterPosts} />
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Free audit"
+      heading="Get your free Google Ads audit"
+      subheading="Already running ads? We'll review your account and show you where your budget is being wasted and how to fix it."
+      ctaLabel="Request a free audit"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+@media (max-width: 700px) {
+  .ads-split { grid-template-columns: minmax(0,1fr) !important; }
+}
+</style>

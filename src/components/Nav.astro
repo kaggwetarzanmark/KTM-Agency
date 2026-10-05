@@ -1,0 +1,318 @@
+---
+import Logo from './Logo.astro';
+
+const currentPath = Astro.url.pathname;
+
+const services = [
+  { label: 'Web Design',      href: '/services/web-design-kampala/' },
+  { label: 'Web Development', href: '/services/web-development-uganda/' },
+  { label: 'App Development', href: '/services/app-development-uganda/' },
+  { label: 'SEO Services',    href: '/services/seo-services-uganda/' },
+  { label: 'Google Ads',      href: '/services/google-ads-uganda/' },
+  { label: 'Facebook Ads',    href: '/services/facebook-ads-uganda/' },
+];
+
+const navLinks = [
+  { label: 'Home',      href: '/' },
+  { label: 'Services',  href: '/services/', children: services },
+  { label: 'Portfolio', href: '/portfolio/' },
+  { label: 'Blog',      href: '/blog/' },
+  { label: 'About',     href: '/about/' },
+];
+---
+
+<header class="sitenav" id="nav">
+  <div class="sitenav-in">
+
+    <!-- Logo — left -->
+    <div class="sitenav-left">
+      <Logo size={34} color="white" />
+    </div>
+
+    <!-- Nav links — absolutely centred -->
+    <nav class="sitenav-links" id="links" aria-label="Main navigation">
+      {navLinks.map(link => (
+        link.children ? (
+          <div class="sitenav-has-menu">
+            <a
+              href={link.href}
+              aria-haspopup="true"
+              class:list={['sitenav-link', currentPath.startsWith('/services') && 'is-active']}
+            >
+              {link.label}
+              <svg class="sitenav-ic" aria-hidden="true"><use href="#i-down"/></svg>
+            </a>
+            <div class="sitenav-menu">
+              <div class="sitenav-menu-box">
+                {link.children.map(child => (
+                  <a
+                    href={child.href}
+                    class:list={['sitenav-menu-link', currentPath === child.href && 'is-active']}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <a
+            href={link.href}
+            class:list={['sitenav-link', currentPath === link.href && 'is-active']}
+          >
+            {link.label}
+          </a>
+        )
+      ))}
+
+      <!-- Red pill CTA sits inline with the links -->
+      <a class="sitenav-cta-pill" href="/contact/">Get a Free Quote</a>
+
+      <!-- Mobile-only CTA shown inside the open drawer -->
+      <a class="sitenav-mobile-cta" href="/contact/">Get a Free Quote</a>
+    </nav>
+
+    <!-- Right side: phone number + hamburger only -->
+    <div class="sitenav-right">
+      <a class="sitenav-phone" href="tel:+256753784595">+256 753 784 595</a>
+      <button
+        class="sitenav-burger"
+        id="burger"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="links"
+      >
+        <svg class="sitenav-ic" aria-hidden="true" style="width:20px;height:20px"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<style>
+/* ── SHELL ─────────────────────────────────────────────────── */
+.sitenav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #0B0A0A;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+/* Three-column grid: logo | centre | right */
+.sitenav-in {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 68px;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 3vw, 40px);
+  gap: 16px;
+}
+
+/* ── LEFT ──────────────────────────────────────────────────── */
+.sitenav-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ── CENTRE — absolutely centred by the grid ───────────────── */
+.sitenav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  justify-content: center;
+}
+
+.sitenav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,.72);
+  text-decoration: none;
+  transition: color .15s, background .15s;
+  white-space: nowrap;
+}
+.sitenav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
+.sitenav-link.is-active {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+}
+
+/* Red pill CTA inline with links */
+.sitenav-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: #D93225;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  white-space: nowrap;
+  transition: background .15s, transform .15s;
+}
+.sitenav-cta-pill:hover { background: #bf2b1f; transform: translateY(-1px); }
+
+/* Mobile-only CTA (hidden on desktop) */
+.sitenav-mobile-cta { display: none; }
+
+/* ── DROPDOWN ──────────────────────────────────────────────── */
+.sitenav-has-menu { position: relative; }
+.sitenav-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  display: none;
+}
+.sitenav-menu-box {
+  background: #151312;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: 6px;
+  display: grid;
+  box-shadow: 0 20px 56px rgba(0,0,0,.5);
+}
+.sitenav-menu-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.sitenav-menu-link:hover,
+.sitenav-menu-link.is-active { background: rgba(255,255,255,.1); color: #fff; }
+.sitenav-has-menu:hover .sitenav-menu,
+.sitenav-has-menu:focus-within .sitenav-menu { display: block; }
+
+/* ── RIGHT ─────────────────────────────────────────────────── */
+.sitenav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.sitenav-phone {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .02em;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ── ICON ──────────────────────────────────────────────────── */
+.sitenav-ic {
+  width: 12px; height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ── HAMBURGER ─────────────────────────────────────────────── */
+.sitenav-burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .sitenav-phone { display: none; }
+}
+
+@media (max-width: 960px) {
+  /* Switch to flex so the mobile drawer can sit below */
+  .sitenav-in {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sitenav-links {
+    display: none;
+    position: absolute;
+    top: calc(68px + 1px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 12px;
+    background: #151312;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    box-shadow: 0 20px 56px rgba(0,0,0,.5);
+  }
+  .sitenav.open .sitenav-links { display: flex; }
+  .sitenav-link { height: 44px; border-radius: 10px; }
+  .sitenav-has-menu .sitenav-menu {
+    position: static;
+    display: block;
+    transform: none;
+    padding: 0 0 4px 12px;
+    min-width: 0;
+  }
+  .sitenav-menu-box { background: transparent; border: 0; box-shadow: none; padding: 0; }
+  .sitenav-cta-pill { display: none; }
+  .sitenav-mobile-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: #D93225;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+  .sitenav-burger { display: grid; }
+}
+</style>
+
+<script>
+  const nav    = document.getElementById('nav')!;
+  const burger = document.getElementById('burger')!;
+
+  burger.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(isOpen));
+    burger.innerHTML = isOpen
+      ? '<svg class="sitenav-ic" style="width:20px;height:20px" aria-hidden="true"><use href="#i-close"/></svg>'
+      : '<svg class="sitenav-ic" style="width:20px;height:20px" aria-hidden="true"><use href="#i-menu"/></svg>';
+  });
+
+  document.querySelectorAll('.sitenav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.innerHTML = '<svg class="sitenav-ic" style="width:20px;height:20px" aria-hidden="true"><use href="#i-menu"/></svg>';
+    });
+  });
+</script>

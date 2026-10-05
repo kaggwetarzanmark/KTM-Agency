@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+
+const services = [
+  { title:'Web Design',      description:'Professional, mobile-first websites that load fast and look sharp on every screen.',            href:'/services/web-design-kampala/',      iconId:'i-globe',  keyword:'website design Kampala' },
+  { title:'Web Development', description:'Custom systems: e-commerce stores, booking platforms, portals and dashboards.',                 href:'/services/web-development-uganda/',  iconId:'i-code',   keyword:'web development Uganda' },
+  { title:'App Development', description:'Android and iOS apps for delivery, booking, shopping and business management.',                 href:'/services/app-development-uganda/',  iconId:'i-mobile', keyword:'mobile app development Uganda' },
+  { title:'SEO Services',    description:'Show up when Ugandans search for what you sell, on Google Search and Maps.',                    href:'/services/seo-services-uganda/',     iconId:'i-trend',  keyword:'SEO services Uganda' },
+  { title:'Google Ads',      description:'Paid search campaigns that bring buyers to you immediately while your SEO builds up.',          href:'/services/google-ads-uganda/',       iconId:'i-search', keyword:'Google Ads Uganda' },
+  { title:'Facebook Ads',    description:'Reach millions of Ugandans on the social platforms they scroll every single day.',              href:'/services/facebook-ads-uganda/',     iconId:'i-ads',    keyword:'Facebook ads Uganda' },
+];
+
+const steps = [
+  { n:'01', title:'Discovery',  desc:'We learn your business, your customers and your goals before touching anything.' },
+  { n:'02', title:'Strategy',   desc:'We map out the right service mix and set measurable targets.' },
+  { n:'03', title:'Execution',  desc:'Design, build or campaign launch, delivered on time and on brief.' },
+  { n:'04', title:'Results',    desc:'Monthly reports you can read, with clear numbers tied to your goals.' },
+];
+---
+
+<BaseLayout
+  title="Our Services — Web Design, SEO, Ads & App Development | KTM Uganda"
+  description="KTM offers web design, web development, mobile app development, SEO, Google Ads and Facebook Ads for businesses in Kampala and across Uganda."
+>
+  <Hero
+    badge="Services"
+    heading="Everything Your Business Needs Online."
+    subheading="One Kampala team for your website, your search ranking and your ads. No juggling multiple agencies."
+    ctaPrimary={{ label:'Get a Free Consultation', href:'/contact/' }}
+    ctaSecondary={{ label:'See Our Work', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- Service cards -->
+  <section class="section wrap" aria-labelledby="services-heading">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> What we offer</span>
+        <h2 class="h2" id="services-heading">Six ways we grow your business</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+      {services.map(s => (
+        <ServiceCard
+          title={s.title}
+          description={s.description}
+          href={s.href}
+          iconId={s.iconId}
+          keyword={s.keyword}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> Our process</span>
+        <h2 class="h2">How we work</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px">
+      {steps.map(step => (
+        <div style="padding:28px;border-radius:22px;border:1px solid var(--line);display:grid;gap:14px;align-content:start">
+          <span style="font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--accent)">{step.n}</span>
+          <h3 style="font-size:1.2rem;font-weight:500;letter-spacing:-.02em">{step.title}</h3>
+          <p style="font-size:14px;color:var(--muted-text);line-height:1.5">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Not sure where to start?"
+      heading="Get a free consultation"
+      subheading="Tell us about your business and we will tell you which services will have the biggest impact. No obligation."
+      ctaLabel="Book a free call"
+      ctaHref="/contact/"
+      variant="dark"
+    />
+  </div>
+</BaseLayout>

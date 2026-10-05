@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import FAQ from '../../components/FAQ.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+
+const clusterPosts = [
+  {
+    title: 'What is Local SEO? A Complete Guide for Kampala Businesses',
+    slug: 'what-is-local-seo-guide-for-kampala-businesses',
+    description: 'Local SEO helps your Kampala business show up when people nearby search Google. Here\'s exactly how it works.',
+    readTime: '7 min read',
+  },
+  {
+    title: 'How to Rank #1 on Google in Uganda',
+    slug: 'how-to-rank-number-one-on-google-in-uganda',
+    description: 'A practical, step-by-step guide to ranking on the first page of Google — written for Uganda businesses.',
+    readTime: '9 min read',
+  },
+  {
+    title: 'How to Set Up Your Google Business Profile in Uganda',
+    slug: 'google-business-profile-setup-uganda',
+    description: 'The fastest way to appear on Google Maps in Uganda. Step-by-step setup and optimisation guide.',
+    readTime: '8 min read',
+  },
+];
+
+const included = [
+  { icon:'i-globe',   title:'Google Business Profile setup',  desc:'Claim and fully optimise your Google Maps listing so customers find you in local search results.' },
+  { icon:'i-search',  title:'Keyword research',               desc:'We find the exact terms Ugandans type when looking for your product or service.' },
+  { icon:'i-layers',  title:'On-page SEO',                    desc:'Optimised titles, headings, meta descriptions, internal links and structured content on every page.' },
+  { icon:'i-code',    title:'Technical SEO',                  desc:'Fast load speed, mobile-friendly layout, sitemap, schema markup and no crawl errors.' },
+  { icon:'i-trend',   title:'Link building',                  desc:'Links from relevant Ugandan and African websites that build your domain authority over time.' },
+  { icon:'i-receipt', title:'Monthly reporting',              desc:'A plain-English report every month showing your rankings, traffic and where you have improved.' },
+];
+
+const faqs = [
+  { question:'How long does SEO take to show results?', answer:'For most Ugandan businesses targeting local keywords, you can expect to see meaningful ranking improvements within 2 to 4 months. Competitive industries take longer. We track and report progress every month so you can see the movement.' },
+  { question:'What is local SEO?', answer:"Local SEO is the process of optimising your business to appear in Google's map results and local search listings when someone nearby searches for what you offer. For example, appearing when someone searches 'clinic in Ntinda' or 'hotel Kampala'. It is one of the highest-ROI marketing activities for Uganda businesses." },
+  { question:'How much does SEO cost in Uganda?', answer:'Our SEO retainers start from UGX 800K per month. The exact cost depends on the number of pages to optimise, how competitive your industry is and the services included. We give you a fixed monthly quote before starting.' },
+  { question:'Do I need SEO if I am already running Google Ads?', answer:'Yes. Google Ads stops the moment your budget runs out. SEO builds long-term organic rankings that keep sending traffic for free. Most businesses benefit from running both, with Ads bringing immediate leads while SEO builds up over time.' },
+  { question:'How do I get my business on Google Maps?', answer:'You need to claim and verify your Google Business Profile. We set this up, write keyword-rich descriptions, upload photos, add your services and optimise it for the areas you serve. This is included in all our SEO packages.' },
+];
+---
+
+<BaseLayout
+  title="SEO Services Uganda | Rank #1 on Google | KTM Kampala"
+  description="Get your business to the top of Google in Uganda. KTM provides local SEO, on-page SEO and technical SEO for businesses in Kampala and across Uganda. Free audit."
+>
+  <Hero
+    badge="SEO Services · Uganda"
+    heading="SEO Services in Uganda — Rank Higher on Google."
+    subheading="Get found when Ugandans search for what you sell. Local SEO, Google Maps and technical optimisation for businesses across Uganda."
+    ctaPrimary={{ label:'Get a free SEO audit', href:'/contact/' }}
+    ctaSecondary={{ label:'See results', href:'/portfolio/' }}
+    variant="light"
+  />
+
+  <!-- What is SEO -->
+  <section class="section wrap">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,80px);align-items:center" class="seo-split">
+      <div style="display:grid;gap:20px">
+        <span class="eyebrow"><i class="sq"></i> What is SEO?</span>
+        <h2 class="h2">Why ranking on Google matters in Uganda</h2>
+        <p style="font-size:15px;color:var(--muted-text);line-height:1.6">
+          Over 95% of Ugandan internet searches happen on Google. When someone searches for a plumber in Kampala,
+          a clinic in Ntinda or a hotel in Entebbe, the businesses that appear first get the call.
+          SEO is the work that gets you into those top positions, and keeps you there.
+        </p>
+        <p style="font-size:15px;color:var(--muted-text);line-height:1.6">
+          Unlike paid ads, organic rankings do not stop when your budget runs out. A well-optimised page
+          can send you free traffic for years.
+        </p>
+      </div>
+      <div style="background:var(--surface);border-radius:22px;padding:32px;display:grid;gap:16px">
+        <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;color:var(--accent);text-transform:uppercase">Uganda search facts</p>
+        {[
+          { n:'95%+',  l:'of searches in Uganda happen on Google' },
+          { n:'80%+',  l:'of searches are on mobile phones' },
+          { n:'3x',    l:'more clicks go to the top 3 organic results' },
+          { n:'26M+',  l:'internet users in Uganda and growing' },
+        ].map(f => (
+          <div style="display:flex;align-items:center;gap:16px;padding-block:14px;border-bottom:1px dashed var(--line)">
+            <b style="font-family:var(--font-display);font-size:2rem;font-weight:500;letter-spacing:-.04em;color:var(--accent);white-space:nowrap;min-width:80px">{f.n}</b>
+            <p style="font-size:14px;color:var(--muted-text)">{f.l}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="wrap" style="padding-bottom:clamp(48px,7vw,96px)">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><i class="sq"></i> What's included</span>
+        <h2 class="h2">Everything in our SEO service</h2>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+      {included.map(item => (
+        <div style="display:grid;grid-template-columns:40px 1fr;gap:14px;padding:24px;border-radius:22px;border:1px solid var(--line);align-items:start">
+          <div style="width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center">
+            <svg class="ic" style="width:20px;height:20px;color:var(--accent)"><use href={`#${item.icon}`}/></svg>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;font-weight:500;letter-spacing:-.02em;margin-bottom:6px">{item.title}</h3>
+            <p style="font-size:13.5px;color:var(--muted-text);line-height:1.5">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="wrap">
+    <FAQ items={faqs} heading="SEO in Uganda: Common Questions" />
+  </div>
+
+  <!-- Related cluster posts -->
+  <div class="wrap">
+    <RelatedPosts heading="SEO Resources" posts={clusterPosts} />
+  </div>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Free audit"
+      heading="Get your free SEO audit"
+      subheading="We'll check your current rankings, Google Maps listing and on-page SEO, then show you the three highest-impact fixes."
+      ctaLabel="Request a free SEO audit"
+      ctaHref="/contact/"
+      variant="red"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+@media (max-width: 700px) {
+  .seo-split { grid-template-columns: minmax(0,1fr) !important; }
+}
+</style>

@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import PortfolioCard from '../../components/PortfolioCard.astro';
+import CTABanner from '../../components/CTABanner.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('portfolio');
+const projects = allProjects.sort(
+  (a, b) => b.data.completedDate.valueOf() - a.data.completedDate.valueOf()
+);
+
+const serviceTypes = ['All', 'Web Design', 'Web Development', 'App Development', 'SEO', 'Google Ads', 'Facebook Ads'];
+---
+
+<BaseLayout
+  title="Our Work — Web Design & App Development Portfolio | KTM Uganda"
+  description="Browse KTM's portfolio of websites, mobile apps, and digital marketing campaigns for businesses across Uganda and Kampala."
+>
+  <Hero
+    badge="Portfolio"
+    heading="Work That Gets Results."
+    subheading="Websites, apps and ad campaigns we have built for businesses across Uganda. Every project is measured by the impact on the client's revenue."
+    ctaPrimary={{ label:'Start your project', href:'/contact/' }}
+    variant="light"
+  />
+
+  <section class="section wrap" aria-labelledby="portfolio-heading">
+    <!-- Filter bar -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px" role="group" aria-label="Filter by service type">
+      {serviceTypes.map(type => (
+        <button
+          class="filter-btn"
+          data-filter={type}
+          aria-pressed={type === 'All' ? 'true' : 'false'}
+          type="button"
+        >
+          {type}
+        </button>
+      ))}
+    </div>
+
+    {projects.length > 0 ? (
+      <div class="grid3" id="portfolioGrid">
+        {projects.map((p, i) => (
+          <div data-type={p.data.serviceType} class="portfolio-item">
+            <PortfolioCard
+              title={p.data.title}
+              client={p.data.client}
+              serviceType={p.data.serviceType}
+              industry={p.data.industry}
+              slug={p.slug}
+              image={p.data.image}
+              result={p.data.results[0]}
+              index={i}
+            />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div>
+        <p style="color:var(--muted-text);font-size:15px;margin-bottom:32px">
+          Projects coming soon. Add your case studies to <code>src/content/portfolio/</code>.
+        </p>
+        <div class="grid3">
+          {[
+            { client:'Lakeside Dental',  type:'Web Design',  industry:'Healthcare', result:'300% increase in website traffic in 60 days' },
+            { client:'SwiftBoda',        type:'App Development', industry:'Logistics', result:'App launched on Android with 1,000+ downloads in month one' },
+            { client:'Kololo Homes',     type:'Google Ads',  industry:'Real Estate', result:'Cost per lead reduced by 45% in the first 90 days' },
+          ].map((p, i) => (
+            <a class="proj" href="/contact/">
+              <div class={`proj-art pa${(i % 3) + 1}`}>
+                <span class="tagsample">Sample</span>
+              </div>
+              <div class="proj-meta">
+                <h3>{p.client}</h3>
+                <span class="pill">{p.type}</span>
+              </div>
+              <p>{p.result}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+
+  <div class="wrap" style="padding-bottom:clamp(64px,9vw,120px)">
+    <CTABanner
+      badge="Ready to start?"
+      heading="Your project could be next"
+      subheading="Tell us what you need and we will send a quote within 24 hours."
+      ctaLabel="Start your project"
+      ctaHref="/contact/"
+      variant="dark"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.filter-btn:hover,
+.filter-btn[aria-pressed="true"] {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+.portfolio-item.hidden { display: none; }
+</style>
+
+<script>
+const btns  = Array.from(document.querySelectorAll<HTMLButtonElement>('.filter-btn'));
+const items = Array.from(document.querySelectorAll<HTMLElement>('.portfolio-item'));
+
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter ?? 'All';
+    btns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+    btn.setAttribute('aria-pressed', 'true');
+
+    items.forEach(item => {
+      const match = filter === 'All' || item.dataset.type === filter;
+      item.classList.toggle('hidden', !match);
+    });
+  });
+});
+</script>
