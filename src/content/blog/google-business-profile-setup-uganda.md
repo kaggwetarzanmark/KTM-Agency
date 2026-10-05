@@ -6,7 +6,7 @@ author: "KTM Agency"
 category: "SEO"
 tags: ["Google Business Profile Uganda", "Google My Business Uganda", "Google Maps Uganda", "local SEO Uganda"]
 featured: false
-image: "/images/blog/google-business-profile-uganda.jpg"
+image: "/images/blog/google-business-profile-uganda.png"
 imageAlt: "How to Set Up Your Google Business Profile in Uganda — Step-by-Step Guide showing Google Maps listing on laptop and phone in Kampala"
 ---
 
