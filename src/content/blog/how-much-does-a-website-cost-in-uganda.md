@@ -25,9 +25,9 @@ Before looking at price ranges, it helps to understand what you're actually payi
 
 ## Website Price Ranges in Uganda
 
-### Basic Business Website — UGX 1.5M to 3M
+### Basic Business Website — UGX 720,000 to 1,350,000
 
-This covers a 3 to 5 page site with:
+This covers a 6 to 10 page site with:
 - Home, About, Services, Contact pages
 - Mobile-friendly design
 - Contact form and WhatsApp button
@@ -36,7 +36,7 @@ This covers a 3 to 5 page site with:
 
 This is the right starting point for a new business that just needs a professional online presence. Most small businesses in Kampala fall into this category.
 
-### Standard Business Website — UGX 3M to 7M
+### Standard Business Website — UGX 1,350,000 to 2,250,000
 
 For businesses that need more:
 - Up to 10 pages
@@ -48,7 +48,7 @@ For businesses that need more:
 
 This is the most common package for established businesses that want to rank on Google and generate enquiries.
 
-### E-Commerce Website — UGX 7M to 20M
+### E-Commerce Website — UGX 2,250,000 to 5,000,000
 
 Online stores require significantly more work:
 - Product catalogue setup
@@ -60,7 +60,7 @@ Online stores require significantly more work:
 
 The price depends heavily on the number of products and the payment methods required.
 
-### Custom Web Application — UGX 15M+
+### Custom Web Application — UGX 5,000,000+
 
 If you need something that doesn't fit a standard website — a booking platform, a delivery management system, a membership portal — you're looking at custom development. These projects are scoped individually.
 
@@ -101,7 +101,7 @@ Watch out for agencies that quote a low price but charge separately for hosting,
 
 ## KTM Agency Website Packages
 
-At KTM, all our websites include mobile-first design, SEO setup, WhatsApp integration and hosting on Cloudflare — the fastest CDN in Africa. We offer three packages starting from UGX 1.5M with fixed pricing agreed before we start.
+At KTM, all our websites include mobile-first design, SEO setup, WhatsApp integration and hosting on Cloudflare — the fastest CDN in Africa. We offer four packages starting from UGX 720,000, all 10% cheaper than comparable agencies, with fixed pricing agreed before we start.
 
 [Get a free website quote from KTM](/contact/) and we'll send you a breakdown within 24 hours.
 

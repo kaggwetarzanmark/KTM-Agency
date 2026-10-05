@@ -44,29 +44,87 @@ const process = [
 
 const packages = [
   {
-    name: 'Starter',
-    tagline: 'Perfect for new businesses',
-    pages: 'Up to 5 pages',
-    features: ['Mobile-first design','Contact form + WhatsApp button','Basic SEO setup','Google Maps embed','1 round of revisions'],
+    name: 'Basic',
+    tagline: 'Perfect for new and small businesses',
+    pages: 'Up to 6 pages',
+    price: 'UGX 720,000',
+    originalPrice: 'UGX 800,000',
+    saving: 'Save 10%',
+    features: [
+      'Mobile-first design',
+      'Up to 6 custom pages',
+      'Contact form + WhatsApp button',
+      'Basic SEO setup',
+      'Google Maps embed',
+      'Domain and hosting guidance',
+      'Online support',
+    ],
+    highlight: false,
+    cta: 'Get started',
   },
   {
-    name: 'Business',
-    tagline: 'Most popular for growing companies',
+    name: 'Standard',
+    tagline: 'Most popular for growing businesses',
     pages: 'Up to 10 pages',
-    features: ['Everything in Starter','Blog setup','Advanced SEO','Google Analytics setup','Gallery or portfolio section','3 rounds of revisions'],
+    price: 'UGX 1,350,000',
+    originalPrice: 'UGX 1,500,000',
+    saving: 'Save 10%',
+    features: [
+      'Everything in Basic',
+      'Up to 10 custom pages',
+      'Blog setup',
+      'Advanced SEO + Google Analytics',
+      'Gallery or portfolio section',
+      'Social media integration',
+      '3 rounds of revisions',
+      'Online support',
+    ],
     highlight: true,
+    cta: 'Get started',
   },
   {
-    name: 'Enterprise',
-    tagline: 'For established businesses',
+    name: 'Golden',
+    tagline: 'For established businesses ready to grow',
+    pages: 'Up to 30 pages',
+    price: 'UGX 2,250,000',
+    originalPrice: 'UGX 2,500,000',
+    saving: 'Save 10%',
+    features: [
+      'Everything in Standard',
+      'Up to 30 custom pages',
+      'E-commerce ready',
+      'MoMo and card payment integration',
+      'Custom contact forms',
+      'Speed and performance optimisation',
+      'Priority support',
+    ],
+    highlight: false,
+    cta: 'Get started',
+  },
+  {
+    name: 'Platinum',
+    tagline: 'Full-scale solution for large businesses',
     pages: 'Unlimited pages',
-    features: ['Everything in Business','Custom functionality','MoMo or card payment integration','Staff training session','Priority support for 3 months'],
+    price: 'UGX 3,600,000',
+    originalPrice: 'UGX 4,000,000',
+    saving: 'Save 10%',
+    features: [
+      'Everything in Golden',
+      'Unlimited pages',
+      'Custom web application features',
+      'Staff training session',
+      'Dedicated account manager',
+      'Priority support for 3 months',
+      'Monthly maintenance included',
+    ],
+    highlight: false,
+    cta: 'Get started',
   },
 ];
 
 const faqs = [
   { question:'How long does a website take to build in Uganda?', answer:'Most business websites take 2 to 4 weeks from the discovery call to launch, depending on how quickly you provide content (text, images, logo). We will give you a specific timeline in your quote.' },
-  { question:'How much does a website cost in Uganda?', answer:'A basic 5-page business website starts from around UGX 1.5M. Larger sites with e-commerce or booking systems cost more. We send a fixed-price quote before starting so there are no surprises.' },
+  { question:'How much does a website cost in Uganda?', answer:'A basic 6-page business website starts from UGX 720,000. Larger sites with e-commerce or booking systems cost more. We send a fixed-price quote before starting so there are no surprises.' },
   { question:'Will my website work on mobile phones?', answer:'Yes. Every website we build is mobile-first, meaning it is designed for phones before desktops. We test on the most common Android devices used in Uganda before launch.' },
   { question:'Do you provide hosting and a domain?', answer:'Yes. We handle domain registration and set up hosting on Cloudflare Pages, which is free and extremely fast across Africa. We will explain the annual renewal costs upfront.' },
   { question:'Can I update the website myself?', answer:'Yes. Depending on your package, we can set up a simple content management system so you can edit text, update prices and upload photos without any coding knowledge.' },
@@ -75,7 +133,7 @@ const faqs = [
 
 <BaseLayout
   title="Website Design Kampala Uganda | Affordable & Professional | KTM Agency"
-  description="KTM Agency builds professional, mobile-first websites for businesses in Kampala and across Uganda. SEO-ready, fast-loading, fixed pricing from UGX 1.5M. Free quote in 24 hours."
+  description="KTM Agency builds professional, mobile-first websites for businesses in Kampala and across Uganda. SEO-ready, fast-loading, packages from UGX 720,000. Free quote in 24 hours."
 >
   <Hero
     badge="Web Design · Kampala, Uganda"
@@ -137,27 +195,53 @@ const faqs = [
       </div>
       <p class="lead">All prices are fixed. You approve the quote before we start.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+    <p style="font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--accent);text-transform:uppercase;margin-bottom:32px">
+      Limited onboarding slots this month. Book early to secure your timeline.
+    </p>
+    <div class="pricing-grid">
       {packages.map(pkg => (
-        <div style={`padding:32px;border-radius:22px;border:${pkg.highlight ? '2px solid var(--accent)' : '1px solid var(--line)'};display:grid;gap:20px;align-content:start;background:${pkg.highlight ? 'var(--surface)' : 'var(--bg)'}`}>
-          {pkg.highlight && <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--accent);text-transform:uppercase">Most popular</span>}
-          <div>
-            <h3 style="font-size:1.5rem;font-weight:500;letter-spacing:-.03em">{pkg.name}</h3>
-            <p style="font-size:14px;color:var(--muted-text);margin-top:4px">{pkg.tagline}</p>
+        <div class:list={['pricing-card', pkg.highlight && 'pricing-card--highlight']}>
+
+          {/* Popular badge */}
+          {pkg.highlight && (
+            <div class="pricing-popular">Most popular</div>
+          )}
+
+          {/* Header */}
+          <div class="pricing-header">
+            <h3 class="pricing-name">{pkg.name}</h3>
+            <p class="pricing-tagline">{pkg.tagline}</p>
           </div>
-          <p style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.04em;text-transform:uppercase">{pkg.pages}</p>
-          <ul style="display:grid;gap:10px">
+
+          {/* Price */}
+          <div class="pricing-price-block">
+            <div class="pricing-original">{pkg.originalPrice}</div>
+            <div class="pricing-amount">{pkg.price}</div>
+            <span class="pricing-save">{pkg.saving}</span>
+          </div>
+
+          {/* Pages badge */}
+          <div class="pricing-pages">{pkg.pages}</div>
+
+          {/* Features */}
+          <ul class="pricing-features">
             {pkg.features.map(feat => (
-              <li style="display:flex;gap:10px;align-items:flex-start;font-size:14px">
-                <svg class="ic" style="color:var(--accent);margin-top:2px;flex-shrink:0"><use href="#i-check"/></svg>
+              <li>
+                <svg class="ic" style="color:var(--accent);flex-shrink:0;margin-top:2px"><use href="#i-check"/></svg>
                 {feat}
               </li>
             ))}
           </ul>
-          <a class:list={['btn btn-lg', pkg.highlight ? 'btn-red' : 'btn-ink']} href="/contact/" style="justify-self:start">
-            Get a quote
+
+          {/* CTA */}
+          <a
+            class:list={['btn btn-lg pricing-cta', pkg.highlight ? 'btn-red' : 'btn-ink']}
+            href="/contact/"
+          >
+            {pkg.cta}
             <svg class="ic"><use href="#i-arrow"/></svg>
           </a>
+
         </div>
       ))}
     </div>
@@ -185,3 +269,127 @@ const faqs = [
     />
   </div>
 </BaseLayout>
+
+<style>
+/* ── PRICING GRID ─────────────────────────────────────────────── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.pricing-card {
+  position: relative;
+  padding: 32px 28px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  display: grid;
+  gap: 20px;
+  align-content: start;
+  transition: box-shadow .2s;
+}
+.pricing-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,.08);
+}
+.pricing-card--highlight {
+  border: 2px solid var(--accent);
+  background: var(--surface);
+}
+
+/* Popular badge */
+.pricing-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Header */
+.pricing-header { display: grid; gap: 4px; }
+.pricing-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -.03em;
+}
+.pricing-tagline {
+  font-size: 13.5px;
+  color: var(--muted-text);
+}
+
+/* Price block */
+.pricing-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--line);
+}
+.pricing-original {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+}
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: var(--fg);
+}
+.pricing-card--highlight .pricing-amount {
+  color: var(--accent);
+}
+.pricing-save {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  background: rgba(217,50,37,.1);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 999px;
+  align-self: center;
+}
+
+/* Pages pill */
+.pricing-pages {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Features list */
+.pricing-features {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pricing-features li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* CTA */
+.pricing-cta { justify-self: start; }
+</style>
