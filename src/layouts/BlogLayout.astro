@@ -274,7 +274,7 @@ const artLabel: Record<string,string> = {
 <style>
 /* ── HERO ─────────────────────────────────────────────────────── */
 .bl-hero-wrap {
-  max-width: 1320px;
+  max-width: 1180px;
   margin-inline: auto;
   padding: clamp(32px, 5vw, 56px) clamp(16px, 3vw, 40px) 0;
 }
@@ -293,9 +293,12 @@ const artLabel: Record<string,string> = {
 
 /* ── HEADER ───────────────────────────────────────────────────── */
 .bl-header-wrap {
-  max-width: 860px;
+  /* Match the layout: offset by sidebar width + gap so header aligns with content */
+  max-width: 1180px;
   margin-inline: auto;
   padding: 40px clamp(16px, 3vw, 40px) 0;
+  /* Push the header text to start at the content column */
+  padding-left: calc(clamp(16px, 3vw, 40px) + 220px + 56px);
 }
 .bl-breadcrumb {
   display: flex;
@@ -388,22 +391,21 @@ const artLabel: Record<string,string> = {
 
 /* ── TWO-COLUMN LAYOUT ────────────────────────────────────────── */
 .bl-layout {
-  max-width: 1320px;
+  max-width: 1180px;
   margin-inline: auto;
   padding: 48px clamp(16px, 3vw, 40px) clamp(48px, 7vw, 96px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
+  /* Sidebar LEFT, content RIGHT (centred) */
+  grid-template-columns: 220px minmax(0, 1fr);
   gap: 56px;
   align-items: start;
-  /* Sidebar on the RIGHT — reverse column order */
-  direction: rtl;
 }
-.bl-sidebar, .bl-main { direction: ltr; }
 
-/* ── SIDEBAR TOC ──────────────────────────────────────────────── */
+/* ── SIDEBAR TOC — left column ────────────────────────────────── */
 .bl-sidebar {
   position: sticky;
   top: 96px;
+  /* grid-column defaults to 1 — sidebar stays left */
 }
 .bl-sidebar-inner {
   background: var(--surface);
@@ -432,7 +434,7 @@ const artLabel: Record<string,string> = {
   display: block;
   padding: 7px 10px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--muted-text);
   text-decoration: none;
   line-height: 1.35;
@@ -450,8 +452,12 @@ const artLabel: Record<string,string> = {
   font-weight: 500;
 }
 
-/* ── MAIN CONTENT ─────────────────────────────────────────────── */
-.bl-main { min-width: 0; }
+/* ── MAIN CONTENT — right column, centred ─────────────────────── */
+.bl-main {
+  /* Cap width so long lines don't stretch across the full column */
+  max-width: 720px;
+  min-width: 0;
+}
 
 /* Tags */
 .bl-tags {
@@ -517,7 +523,7 @@ const artLabel: Record<string,string> = {
 
 /* CTA wrapper */
 .bl-cta-wrap {
-  max-width: 1320px;
+  max-width: 1180px;
   margin-inline: auto;
   padding: 0 clamp(16px, 3vw, 40px) clamp(64px, 9vw, 120px);
 }
@@ -793,15 +799,17 @@ const artLabel: Record<string,string> = {
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  /* Stack to single column — sidebar moves above content */
+  /* Stack: TOC above content on mobile */
   .bl-layout {
     grid-template-columns: minmax(0, 1fr);
-    direction: ltr;
     gap: 32px;
   }
   .bl-sidebar { position: static; }
   .bl-sidebar-inner { border-radius: 14px; }
-  /* Show inline .toc on mobile since sidebar is collapsed */
+  .bl-main { max-width: none; }
+  /* Remove sidebar offset from header on mobile */
+  .bl-header-wrap { padding-left: clamp(16px, 3vw, 40px); }
+  /* Show inline .toc on mobile since sidebar collapses */
   .prose .toc { display: block; }
 }
 
