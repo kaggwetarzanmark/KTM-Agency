@@ -269,6 +269,32 @@ const artLabel: Record<string,string> = {
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
 })();
+
+// ── AUTO-WRAP WIDE TABLES ────────────────────────────────────────
+// Wraps any table that overflows its container in a scroll div
+// and removes the fade mask when the table fits without scrolling.
+(function () {
+  const prose = document.querySelector<HTMLElement>('.prose');
+  if (!prose) return;
+
+  prose.querySelectorAll<HTMLTableElement>('table').forEach(table => {
+    // Already wrapped
+    if (table.parentElement?.classList.contains('table-scroll')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'table-scroll';
+    table.parentNode!.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+
+    // Check if scrollable and toggle the fade mask
+    function checkOverflow() {
+      const overflows = wrapper.scrollWidth > wrapper.clientWidth + 2;
+      wrapper.classList.toggle('no-overflow', !overflows);
+    }
+    checkOverflow();
+    window.addEventListener('resize', checkOverflow, { passive: true });
+  });
+})();
 </script>
 
 <style>
@@ -677,36 +703,127 @@ const artLabel: Record<string,string> = {
 .prose ol li { margin-bottom: .55em; line-height: 1.55; padding-left: .25em; }
 
 /* ── TABLE ──────────────────────────────────────────────────────── */
+/* ── TABLE ──────────────────────────────────────────────────────── */
+
+/* Wrapper handles horizontal scroll + fade edges */
 .prose table {
+  /* Reset display so border-radius works */
+  display: table;
   width: 100%;
-  border-collapse: collapse;
-  margin: 1.8em 0;
-  font-size: .9em;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2em 0;
+  font-size: .91em;
   border-radius: 14px;
-  overflow: hidden;
   border: 1px solid var(--line);
+  overflow: hidden;
+  /* Prevent layout blowout */
+  table-layout: auto;
+  min-width: 100%;
+}
+
+/* Scroll wrapper — injected by JS below for wide tables */
+.prose .table-scroll {
   display: block;
+  width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  /* Fade edges on overflow */
+  -webkit-mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 85%, transparent 100%);
+  margin: 2em 0;
+  border-radius: 14px;
 }
-.prose thead tr { background: var(--dark); color: var(--on-dark); }
+.prose .table-scroll table {
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+/* Remove fade when not overflowing */
+.prose .table-scroll.no-overflow {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* ── HEADER ROW ─────────────────────────────────────────────────── */
+.prose thead tr {
+  background: var(--dark);
+  color: var(--on-dark);
+}
 .prose thead th {
-  padding: 12px 16px;
+  padding: 13px 18px;
   text-align: left;
   font-weight: 600;
-  font-size: .8em;
-  letter-spacing: .04em;
+  font-size: .78em;
+  letter-spacing: .06em;
   text-transform: uppercase;
   white-space: nowrap;
+  color: rgba(255,255,255,.75);
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.prose thead th:last-child { border-right: none; }
+/* Accent left border on first header cell */
+.prose thead th:first-child {
+  border-left: 3px solid var(--accent);
+}
+
+/* ── BODY CELLS ─────────────────────────────────────────────────── */
+.prose tbody tr {
+  transition: background .12s;
+}
+.prose tbody tr:hover td {
+  background: rgba(217, 50, 37, .04);
 }
 .prose tbody td {
-  padding: 12px 16px;
+  padding: 13px 18px;
   border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
   vertical-align: top;
-  line-height: 1.5;
+  line-height: 1.55;
+  color: var(--fg);
 }
+.prose tbody td:last-child { border-right: none; }
 .prose tbody tr:last-child td { border-bottom: none; }
-.prose tbody tr:nth-child(even) td { background: var(--surface); }
+
+/* Alternating row stripes */
+.prose tbody tr:nth-child(even) td {
+  background: var(--surface);
+}
+.prose tbody tr:nth-child(even):hover td {
+  background: rgba(217, 50, 37, .04);
+}
+
+/* First column — slightly bolder, accent-tinted */
+.prose tbody td:first-child {
+  font-weight: 600;
+  color: var(--fg);
+  /* Subtle left accent line matching the header */
+  border-left: 3px solid var(--line);
+}
+.prose tbody tr:hover td:first-child {
+  border-left-color: var(--accent);
+}
+
+/* ── SPECIAL CELL VALUES ─────────────────────────────────────────── */
+/* ✅ and ❌ inside cells get coloured */
+.prose tbody td:has(> *:only-child) { }
+
+/* Make Yes/No type cells easy to scan */
+.prose td-yes  { color: #16a34a; font-weight: 600; }
+.prose td-no   { color: var(--accent); font-weight: 600; }
+
+/* ── CAPTION (optional) ──────────────────────────────────────────── */
+.prose table caption {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+  padding-bottom: 10px;
+  text-align: left;
+  caption-side: top;
+}
+
 .prose tbody td:first-child { font-weight: 500; }
 
 /* ── BLOCKQUOTE (Q&A) ───────────────────────────────────────────── */
