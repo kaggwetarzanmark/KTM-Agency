@@ -222,13 +222,16 @@ const updatedFormatted = updatedDate?.toLocaleDateString('en-UG', {
     return;
   }
 
-  // Build TOC list
-  headings.forEach(h => {
+  // Build TOC list — bold links, spaced to mirror section depth
+  headings.forEach((h, i) => {
     const li  = document.createElement('li');
     const a   = document.createElement('a');
     a.href    = `#${h.id}`;
-    // Strip the leading counter number added by CSS ::before (purely visual)
     a.textContent = h.textContent?.trim() ?? '';
+    // Every TOC entry is bold per spec
+    a.style.fontWeight = '600';
+    // Add top spacing between entries to breathe
+    if (i > 0) li.style.marginTop = '4px';
     li.appendChild(a);
     tocList.appendChild(li);
   });
@@ -248,6 +251,18 @@ const updatedFormatted = updatedDate?.toLocaleDateString('en-UG', {
 
   window.addEventListener('scroll', setActive, { passive: true });
   setActive();
+})();
+
+// ── STRIP EMOJIS FROM CALLOUT LABELS ────────────────────────────
+// Removes leading emoji characters from the first <strong> inside
+// .stat, .tip and .warn callout divs.
+(function () {
+  const emojiRe = /^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE00}-\u{FEFF}\u{1F000}-\u{1FFFF}️⚠️📌💡✅❌⚠]+\s*/u;
+  document.querySelectorAll<HTMLElement>('.prose .stat > strong:first-child, .prose .tip > strong:first-child, .prose .warn > strong:first-child').forEach(el => {
+    el.textContent = (el.textContent ?? '').replace(emojiRe, '').replace(/^[\s:]+/, '').trim();
+    // Capitalise first letter
+    if (el.textContent) el.textContent = el.textContent.charAt(0).toUpperCase() + el.textContent.slice(1);
+  });
 })();
 
 // ── AUTO-WRAP WIDE TABLES ────────────────────────────────────────
@@ -1015,4 +1030,43 @@ const updatedFormatted = updatedDate?.toLocaleDateString('en-UG', {
 }
 .prose .related-links a:hover { border-color: var(--accent); color: var(--fg); background: none; }
 .prose .related-links a::after { content: "↗"; color: var(--accent); flex-shrink: 0; }
+
+/* ── SECTION SPACING ─────────────────────────────────────────────
+   Ample breathing room between sections, matching TOC hierarchy.
+   ─────────────────────────────────────────────────────────────── */
+
+/* H2: generous top space; first one slightly tighter */
+.prose h2 { margin-top: 80px; margin-bottom: 20px; }
+.prose h2:first-of-type { margin-top: 52px; }
+
+/* H3: spacious but subordinate to H2 */
+.prose h3 { margin-top: 44px; margin-bottom: 14px; }
+
+/* Paragraphs: consistent 20px bottom gap */
+.prose p { margin-bottom: 20px; }
+
+/* Callout boxes: generous vertical isolation */
+.prose .stat,
+.prose .tip,
+.prose .warn { margin-top: 40px; margin-bottom: 40px; }
+
+/* Stats bar: extra breathing room */
+.prose .stats-bar { margin-top: 60px; margin-bottom: 60px; }
+
+/* Checklist: clear separation */
+.prose .checklist { margin-top: 40px; margin-bottom: 40px; }
+
+/* Related links: space from preceding content */
+.prose .related-links { margin-top: 56px; }
+
+/* Tables: space above and below */
+.prose .table-scroll { margin-top: 32px; margin-bottom: 32px; }
+
+/* Lists: spacing from adjacent paragraphs */
+.prose ul { margin-top: 4px; margin-bottom: 24px; }
+.prose ol { margin-top: 4px; margin-bottom: 24px; }
+
+/* ── TOC SIDEBAR: bold entries with spacing ──────────────────── */
+.bl-toc-list a { font-weight: 600; }
+.bl-toc-list li + li { margin-top: 5px; }
 </style>

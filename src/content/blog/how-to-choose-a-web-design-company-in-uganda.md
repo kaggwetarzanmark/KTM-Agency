@@ -1,4 +1,4 @@
----
+﻿---
 title: "How to Choose a Web Design Company in Uganda (2026 Guide)"
 description: "Not all web design companies in Uganda deliver what they promise. Here's exactly what to look for, what questions to ask and what red flags to avoid."
 pubDate: 2026-02-15
@@ -13,7 +13,7 @@ There are dozens of web designers and agencies in Uganda. Some are excellent. So
 This guide walks you through exactly what to look for, what to ask and what warning signs to walk away from.
 
 <div class="stat">
-<strong>📌 Key Stat:</strong> A poorly built website costs Uganda businesses twice — once to build it, and again to rebuild it properly 12 to 18 months later when it fails to generate leads or rank on Google. The right choice upfront pays for itself.
+<strong>📌 Key Stat:</strong> A poorly built website costs Uganda businesses twice, once to build it, and again to rebuild it properly 12 to 18 months later when it fails to generate leads or rank on Google. The right choice upfront pays for itself.
 </div>
 
 <div class="toc">
@@ -49,7 +49,7 @@ When reviewing their portfolio, ask yourself:
 - Can I find these businesses on Google?
 
 <div class="warn">
-<strong>⚠️ Warning:</strong> Some agencies show design mockups or screenshots instead of live URLs. Always insist on visiting the actual live website. A mockup looks good — a slow, broken live site tells you the real story.
+<strong>⚠️ Warning:</strong> Some agencies show design mockups or screenshots instead of live URLs. Always insist on visiting the actual live website. A mockup looks good, a slow, broken live site tells you the real story.
 </div>
 
 ## 2. Check If They Understand SEO {#seo}
@@ -57,7 +57,7 @@ When reviewing their portfolio, ask yourself:
 A beautiful website that nobody can find on Google is a wasted investment. Before hiring any web design company in Uganda, ask these questions directly:
 
 - "Do you do keyword research before building the site?"
-- "How do you handle on-page SEO — title tags, meta descriptions, headings?"
+- "How do you handle on-page SEO, title tags, meta descriptions, headings?"
 - "Will you set up my Google Business Profile?"
 - "Will the site appear in Google Search Console after launch?"
 
@@ -73,10 +73,10 @@ Many Uganda web design quotes look cheap until you see what they exclude. Before
 
 | Item | Should it be included? | What to ask |
 |------|----------------------|-------------|
-| Domain registration | Yes — for year one at minimum | Who registers it — you or the agency? |
+| Domain registration | Yes, for year one at minimum | Who registers it, you or the agency? |
 | Hosting setup | Yes | Where is it hosted? What is the annual cost? |
 | SSL certificate | Yes | Is it included and does it auto-renew? |
-| Mobile responsive design | Yes — non-negotiable | Will you test on actual Android devices? |
+| Mobile responsive design | Yes, non-negotiable | Will you test on actual Android devices? |
 | SEO setup | Yes | Which keywords will you target? |
 | Content upload | Clarify | Do you upload my content or do I? |
 | Training | Important | Will you train me to update the site myself? |
@@ -91,7 +91,7 @@ Many Uganda web design quotes look cheap until you see what they exclude. Before
 A professional web design company has a defined process. Ask them to walk you through it:
 
 1. How do they start a project? (discovery call, brief, questionnaire?)
-2. How do they handle revisions — how many rounds are included?
+2. How do they handle revisions, how many rounds are included?
 3. What do they need from you and when?
 4. What is the timeline from first call to launch?
 5. Who is your main point of contact throughout?
@@ -106,7 +106,7 @@ In Uganda's market, WhatsApp responsiveness is a key indicator. A team that take
 
 ## 6. Ask About Hosting {#hosting}
 
-Where your website is hosted has a major impact on speed — and speed is a Google ranking factor and a key conversion factor in Uganda where many users are on mobile data.
+Where your website is hosted has a major impact on speed, and speed is a Google ranking factor and a key conversion factor in Uganda where many users are on mobile data.
 
 Ask:
 
@@ -118,7 +118,7 @@ The best agencies in Uganda host on Cloudflare Pages, Vercel or similar global C
 
 ## 7. Understand the Maintenance Arrangement {#maintenance}
 
-Websites need ongoing attention — security updates, content changes, bug fixes, plugin updates.
+Websites need ongoing attention, security updates, content changes, bug fixes, plugin updates.
 
 Ask:
 
@@ -166,7 +166,7 @@ Use a comparison table:
 
 - Can I see 5 live websites you have built recently?
 - What is your exact process from brief to launch?
-- What is included in the quote — domain, hosting, SSL, SEO, content upload?
+- What is included in the quote, domain, hosting, SSL, SEO, content upload?
 - Who owns the domain and hosting account after launch?
 - How many revision rounds are included?
 - How do I reach you if something breaks after the site goes live?
@@ -179,7 +179,7 @@ Use a comparison table:
 
 > "How do I know if an agency is trustworthy?"
 
-Ask for references — not testimonials on their own website, but actual client contact details you can reach out to independently. A confident, legitimate agency will provide these without hesitation.
+Ask for references, not testimonials on their own website, but actual client contact details you can reach out to independently. A confident, legitimate agency will provide these without hesitation.
 
 > "Is cheaper always worse?"
 
@@ -195,9 +195,9 @@ Freelancers are fine for basic websites if they have a strong portfolio. An agen
 
 > "How do I avoid getting locked in to one supplier?"
 
-Insist on owning your domain, hosting account and all the code. Get this in writing before the project starts. A reputable agency will have no problem with this — it is a standard requirement.
+Insist on owning your domain, hosting account and all the code. Get this in writing before the project starts. A reputable agency will have no problem with this, it is a standard requirement.
 
-[Get a free website consultation with KTM](/contact/) — we answer every question on this list before we start any project.
+[Get a free website consultation with KTM](/contact/), we answer every question on this list before we start any project.
 
 ## Related Reading
 

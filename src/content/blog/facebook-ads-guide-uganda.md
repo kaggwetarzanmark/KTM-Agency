@@ -1,4 +1,4 @@
----
+﻿---
 title: "Facebook Ads in Uganda: Complete Guide for Businesses (2026)"
 description: "A complete guide to running Facebook and Instagram ads in Uganda. Learn how to set up campaigns, target Ugandan audiences and get more leads for your business."
 pubDate: 2026-05-15
@@ -8,7 +8,7 @@ tags: ["Facebook Ads Uganda", "Facebook advertising Uganda", "Instagram ads Ugan
 featured: false
 ---
 
-Uganda has over 3 million active Facebook users. Most are between 18 and 34, browse on mobile and spend significant time on the platform every day. For businesses targeting Ugandan consumers, Facebook and Instagram advertising is one of the most powerful tools available — when done correctly.
+Uganda has over 3 million active Facebook users. Most are between 18 and 34, browse on mobile and spend significant time on the platform every day. For businesses targeting Ugandan consumers, Facebook and Instagram advertising is one of the most powerful tools available, when done correctly.
 
 This guide explains how Facebook Ads work in Uganda, how to set up your first campaign and how to get the most leads for your budget.
 
@@ -30,7 +30,7 @@ This guide explains how Facebook Ads work in Uganda, how to set up your first ca
 
 ## How Facebook Ads Work in Uganda {#how-facebook-ads-work}
 
-Unlike Google Ads, which targets people actively searching for something, Facebook Ads target people based on **who they are** — their age, location, interests and behaviour.
+Unlike Google Ads, which targets people actively searching for something, Facebook Ads target people based on **who they are**, their age, location, interests and behaviour.
 
 This makes Facebook Ads ideal for:
 
@@ -63,20 +63,20 @@ Scheduling your ads to run during these windows reduces wasted impressions and l
 
 ## Setting Up Your First Campaign (Step-by-Step) {#setup}
 
-### Step 1 — Create a Business Manager Account
+### Step 1, Create a Business Manager Account
 
 Go to [business.facebook.com](https://business.facebook.com) and create a Business Manager account. This keeps your ads separate from your personal Facebook profile and lets you manage multiple pages and ad accounts professionally.
 
-### Step 2 — Set Up Your Ad Account
+### Step 2, Set Up Your Ad Account
 
 Inside Business Manager:
 
 1. Click Settings → Ad Accounts → Add
 2. Create a new ad account
 3. Set your currency to **UGX** and your time zone to **Kampala (EAT/UTC+3)**
-4. Add your payment method — Visa, Mastercard or PayPal work in Uganda
+4. Add your payment method, Visa, Mastercard or PayPal work in Uganda
 
-### Step 3 — Install the Meta Pixel on Your Website
+### Step 3, Install the Meta Pixel on Your Website
 
 The Meta Pixel is a small snippet of code added to your website that tracks visitor behaviour. It powers:
 
@@ -84,9 +84,9 @@ The Meta Pixel is a small snippet of code added to your website that tracks visi
 - Lookalike audiences (finding new people similar to your existing customers)
 - Conversion tracking (knowing which ads actually generate leads)
 
-Install this before running your first campaign — it is the most valuable long-term setup step in your entire Facebook Ads account.
+Install this before running your first campaign, it is the most valuable long-term setup step in your entire Facebook Ads account.
 
-### Step 4 — Choose Your Campaign Objective
+### Step 4, Choose Your Campaign Objective
 
 | Objective | Best for | Uganda performance |
 |-----------|---------|-------------------|
@@ -99,7 +99,7 @@ Install this before running your first campaign — it is the most valuable long
 
 For most Uganda businesses starting out, **Leads** or **Messages** campaigns perform best.
 
-### Step 5 — Define Your Audience
+### Step 5, Define Your Audience
 
 **Location:** Target Uganda specifically, or narrow to Kampala, Entebbe, Jinja or wherever you serve. You can draw a custom radius around a specific point on the map.
 
@@ -115,14 +115,14 @@ For most Uganda businesses starting out, **Leads** or **Messages** campaigns per
 
 **Retargeting:** Target people who visited your website in the last 30, 60 or 90 days. These audiences convert 2 to 5 times better than cold audiences.
 
-### Step 6 — Create Your Ad
+### Step 6, Create Your Ad
 
 **Ad format options:**
 
-- **Single Image** — simple and effective for most Uganda businesses
-- **Video** — higher engagement, especially on mobile
-- **Carousel** — multiple images or products in one scrollable ad
-- **Stories** — full-screen vertical format for Instagram and Facebook Stories
+- **Single Image**, simple and effective for most Uganda businesses
+- **Video**, higher engagement, especially on mobile
+- **Carousel**, multiple images or products in one scrollable ad
+- **Stories**, full-screen vertical format for Instagram and Facebook Stories
 
 **Writing ad copy that works in Uganda:**
 
@@ -134,29 +134,29 @@ For most Uganda businesses starting out, **Leads** or **Messages** campaigns per
 Example for a web design ad:
 *"Is your business invisible on Google? KTM Agency builds fast, affordable websites for Uganda businesses that actually rank. Starting from UGX 720,000. WhatsApp us today: +256 753 784 595"*
 
-### Step 7 — Set Your Budget
+### Step 7, Set Your Budget
 
 | Budget level | Monthly ad spend | Expected outcome |
 |-------------|-----------------|------------------|
-| Testing | UGX 100K to 200K | Limited data — enough to test one audience |
+| Testing | UGX 100K to 200K | Limited data, enough to test one audience |
 | Starter | UGX 200K to 400K | Meaningful lead volume for most industries |
 | Growth | UGX 500K to 1.5M | Scalable lead generation |
 | Scaling | UGX 1.5M+ | Multiple campaigns, audiences and creatives |
 
-Facebook has a **learning phase** for each campaign — it needs approximately 50 conversion events per week to optimise delivery properly. Budgets below UGX 100K per month may not generate enough data for effective optimisation.
+Facebook has a **learning phase** for each campaign, it needs approximately 50 conversion events per week to optimise delivery properly. Budgets below UGX 100K per month may not generate enough data for effective optimisation.
 
 ## Common Mistakes Uganda Businesses Make {#common-mistakes}
 
 <div class="warn">
 <strong>⚠️ These mistakes waste the most budget for Uganda advertisers:</strong>
 
-- Boosting posts instead of using Ads Manager — see our [full comparison guide](/blog/facebook-ads-vs-boosting-uganda/)
-- Targeting "Uganda, all ages, all genders" — far too broad
-- No clear offer in the ad — "we are a company in Kampala" is not an offer
-- Not testing multiple creatives — run at least 2 to 3 ad variations simultaneously
-- Ignoring results — check campaigns at least twice a week
-- No retargeting — warm website visitors convert much better than cold audiences
-- No Meta Pixel installed — running ads without tracking is flying blind
+- Boosting posts instead of using Ads Manager, see our [full comparison guide](/blog/facebook-ads-vs-boosting-uganda/)
+- Targeting "Uganda, all ages, all genders", far too broad
+- No clear offer in the ad, "we are a company in Kampala" is not an offer
+- Not testing multiple creatives, run at least 2 to 3 ad variations simultaneously
+- Ignoring results, check campaigns at least twice a week
+- No retargeting, warm website visitors convert much better than cold audiences
+- No Meta Pixel installed, running ads without tracking is flying blind
 </div>
 
 ## Measuring Facebook Ad Performance {#measuring}
@@ -174,7 +174,7 @@ Track these metrics weekly to understand how your campaigns are performing:
 These benchmarks vary significantly by industry, audience quality and creative effectiveness. A well-managed campaign typically improves by 20 to 40% within the first 60 days as Facebook optimises delivery.
 
 <div class="tip">
-<strong>💡 Expert Tip:</strong> The most important metric is not CPL — it is cost per qualified lead. A lead at UGX 3,000 that never answers your WhatsApp is worthless. A lead at UGX 12,000 that converts to a UGX 2M project is excellent. Always track lead quality, not just lead volume.
+<strong>💡 Expert Tip:</strong> The most important metric is not CPL, it is cost per qualified lead. A lead at UGX 3,000 that never answers your WhatsApp is worthless. A lead at UGX 12,000 that converts to a UGX 2M project is excellent. Always track lead quality, not just lead volume.
 </div>
 
 ## Frequently Asked Questions {#faqs}
@@ -189,9 +189,9 @@ Most campaigns start generating leads within the first 7 to 14 days. The first m
 
 > "Do you create the ad graphics and copy?"
 
-Yes — KTM Agency creates all ad creatives (images or videos) and copy as part of our managed service. You review and approve everything before it goes live.
+Yes, KTM Agency creates all ad creatives (images or videos) and copy as part of our managed service. You review and approve everything before it goes live.
 
-> "Can I target specific areas in Uganda — not the whole country?"
+> "Can I target specific areas in Uganda, not the whole country?"
 
 Yes. Facebook allows targeting by city, district or custom radius. We can focus entirely on Kampala, or expand to Entebbe, Jinja, Mbarara or any combination of areas you serve.
 
@@ -199,7 +199,7 @@ Yes. Facebook allows targeting by city, district or custom radius. We can focus 
 
 Boosting is a simplified ad with very limited targeting and no lead generation capability. Ads Manager gives full control over objectives, audiences, placements and creative testing. See our [complete comparison guide](/blog/facebook-ads-vs-boosting-uganda/).
 
-[Contact KTM for a free Facebook Ads audit](/contact/) — we will review your current setup and show you what is possible for your budget.
+[Contact KTM for a free Facebook Ads audit](/contact/), we will review your current setup and show you what is possible for your budget.
 
 ## Related Reading
 
